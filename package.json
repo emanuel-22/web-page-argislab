@@ -1,0 +1,33 @@
+{
+  "name": "turbo-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev watch",
+    "dev:api": "turbo run dev watch --filter=api --filter=@repo/prisma",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:prisma": "turbo run watch --filter=@repo/prisma",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "setup:db": "node scripts/setup-db.js",
+    "bootstrap": "npm install && npm run setup:db",
+    "lint:web": "turbo run lint --filter=web",
+    "lint:api": "turbo run lint --filter=api"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "prettier": "^3.6.2",
+    "turbo": "^2.6.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@9.8.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

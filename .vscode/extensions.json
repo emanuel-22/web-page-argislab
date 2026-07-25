@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    "usernamehw.errorlens",
+    "yoavbls.pretty-ts-errors",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "mikestead.dotenv"
+  ]
+}
