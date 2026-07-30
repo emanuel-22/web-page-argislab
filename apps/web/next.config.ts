@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'website-assets.studocu.com'},
       { protocol: 'https', hostname: 'www.penguinlibros.com'},
       { protocol: 'https', hostname: 'contentv2.tap-commerce.com'},
-      
+      { protocol: 'https', hostname: '**.static.prezi.com'},
+
     ],
   },
   async rewrites() {

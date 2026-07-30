@@ -1,7 +1,9 @@
 import { BookMarked, BookOpen, FileText, ListChecks, MessageSquare, Presentation, Wrench } from 'lucide-react';
 
 import { ReadingList } from '@/components/reading-list';
-import { BOOKS } from '@/data/books';
+import { TalkList } from '@/components/talk-list';
+import type { Book } from '@/data/books';
+import type { Talk } from '@/data/talks';
 
 const TYPES = [
   'Plantillas',
@@ -35,7 +37,7 @@ const TYPE_ICONS: Record<(typeof TYPES)[number], typeof FileText> = {
 
 type Resource = {
   title: string;
-  type: Exclude<(typeof TYPES)[number], 'Lecturas recomendadas'>;
+  type: Exclude<(typeof TYPES)[number], 'Lecturas recomendadas' | 'Materiales de charlas'>;
   area: string;
 };
 
@@ -50,11 +52,6 @@ const RESOURCES: Resource[] = [
   // { title: 'Guía de buenas prácticas para adoptar IA en equipos', type: 'Guías', area: 'Inteligencia artificial aplicada' },
   // { title: 'Comparativa de herramientas de IA para desarrollo', type: 'Herramientas', area: 'Inteligencia artificial aplicada' },
   // { title: 'Kit de herramientas para testing y calidad', type: 'Herramientas', area: 'Tecnología' },
-  // {
-  //   title: 'Slides: inteligencia artificial generativa aplicada a equipos ágiles',
-  //   type: 'Materiales de charlas',
-  //   area: 'Inteligencia artificial aplicada',
-  // },
 ];
 
 function ResourceCard({ title, type, area }: Resource) {
@@ -73,7 +70,7 @@ function ResourceCard({ title, type, area }: Resource) {
   );
 }
 
-export function ResourceLibrary() {
+export function ResourceLibrary({ books, talks }: { books: Book[]; talks: Talk[] }) {
   return (
     <div className="flex flex-col gap-20">
       <nav className="flex flex-wrap justify-center gap-2">
@@ -102,7 +99,22 @@ export function ResourceLibrary() {
                 <h2 className="text-xl font-black tracking-tight">{type}</h2>
               </div>
               <div className="mt-6">
-                <ReadingList books={BOOKS} />
+                <ReadingList books={books} />
+              </div>
+            </section>
+          );
+        }
+
+        if (type === 'Materiales de charlas') {
+          const Icon = TYPE_ICONS[type];
+          return (
+            <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
+              <div className="flex items-center gap-3 border-b pb-4">
+                <Icon className="h-5 w-5 text-primary" />
+                <h2 className="text-xl font-black tracking-tight">{type}</h2>
+              </div>
+              <div className="mt-6">
+                <TalkList talks={talks} />
               </div>
             </section>
           );

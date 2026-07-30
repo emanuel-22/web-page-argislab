@@ -17,8 +17,8 @@ export default function Home() {
           </h1>
 
           <p className="max-w-2xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
-            Argis Lab es un espacio de aprendizaje, experimentación y comunidad dedicado a la ingeniería de software,
-            la agilidad y la inteligencia artificial aplicada. Tiene como pilar el descubrimiento de formas más humanas y ágiles de construir tecnología
+            Argis Lab es mi espacio profesional para compartir ideas, proyectos, investigaciones y aprendizajes sobre ingeniería de software, agilidad e inteligencia artificial aplicada.
+            Un lugar donde documento mi recorrido, experimento con nuevas herramientas y exploro formas más humanas, ágiles y sostenibles de construir tecnología.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">

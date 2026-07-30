@@ -14,7 +14,10 @@
     "setup:db": "node scripts/setup-db.js",
     "bootstrap": "npm install && npm run setup:db",
     "lint:web": "turbo run lint --filter=web",
-    "lint:api": "turbo run lint --filter=api"
+    "lint:api": "turbo run lint --filter=api",
+    "admin:create": "vite-node scripts/create-admin.ts",
+    "books:migrate": "vite-node scripts/migrate-books.ts",
+    "talks:migrate": "vite-node scripts/migrate-talks.ts"
   },
   "devDependencies": {
     "dotenv-cli": "^11.0.0",
