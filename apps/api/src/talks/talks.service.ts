@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTalkDto } from './dto/create-talk.dto';
 import { UpdateTalkDto } from './dto/update-talk.dto';
+import { fetchOgImage } from './og-image';
 
 @Injectable()
 export class TalksService {
@@ -17,8 +18,9 @@ export class TalksService {
     return talk;
   }
 
-  create(dto: CreateTalkDto) {
-    return this.prisma.talk.create({ data: dto });
+  async create(dto: CreateTalkDto) {
+    const thumbnailUrl = dto.thumbnailUrl ?? (await fetchOgImage(dto.href));
+    return this.prisma.talk.create({ data: { ...dto, thumbnailUrl } });
   }
 
   async update(id: number, dto: UpdateTalkDto) {

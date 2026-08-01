@@ -124,9 +124,15 @@ export function TalkForm({
           <input
             id="thumbnailUrl"
             className={inputClass}
+            placeholder="Dejalo vacío para tomarla automáticamente del link"
             value={form.thumbnailUrl}
             onChange={(e) => setForm({ ...form, thumbnailUrl: e.target.value })}
           />
+          {!editingTalk ? (
+            <p className="text-xs text-muted-foreground">
+              Si lo dejás vacío, al crear la charla intentamos sacar la imagen automáticamente del link de arriba.
+            </p>
+          ) : null}
         </div>
       </div>
 

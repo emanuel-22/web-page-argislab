@@ -4,6 +4,7 @@ export type Talk = {
   href: string;
   description?: string;
   thumbnailUrl?: string;
+  createdAt?: string;
 };
 
 export const TALKS: Talk[] = [

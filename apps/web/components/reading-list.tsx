@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { BookOpen, type LucideIcon } from 'lucide-react';
 import { CATEGORIES, type Book } from '@/data/books';
 
-function BookCard({ title, author, blurb, href, coverUrl, topics }: Book) {
+export function BookCard({ title, author, blurb, href, coverUrl, topics }: Book) {
   return (
     <a
       href={href}

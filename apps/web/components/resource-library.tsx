@@ -1,9 +1,12 @@
+import Link from 'next/link';
 import { BookMarked, BookOpen, FileText, ListChecks, MessageSquare, Presentation, Wrench } from 'lucide-react';
 
-import { ReadingList } from '@/components/reading-list';
+import { BookCard } from '@/components/reading-list';
 import { TalkList } from '@/components/talk-list';
 import type { Book } from '@/data/books';
 import type { Talk } from '@/data/talks';
+
+const PREVIEW_SIZE = 6;
 
 const TYPES = [
   'Plantillas',
@@ -92,21 +95,39 @@ export function ResourceLibrary({ books, talks }: { books: Book[]; talks: Talk[]
       {TYPES.map((type) => {
         if (type === 'Lecturas recomendadas') {
           const Icon = TYPE_ICONS[type];
+          const preview = [...books]
+            .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+            .slice(0, PREVIEW_SIZE);
           return (
             <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
               <div className="flex items-center gap-3 border-b pb-4">
                 <Icon className="h-5 w-5 text-primary" />
                 <h2 className="text-xl font-black tracking-tight">{type}</h2>
               </div>
-              <div className="mt-6">
-                <ReadingList books={books} />
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {preview.map((book) => (
+                  <BookCard key={book.title} {...book} />
+                ))}
               </div>
+              {books.length > PREVIEW_SIZE ? (
+                <div className="mt-6 flex justify-center">
+                  <Link
+                    href="/recursos/lecturas-recomendadas"
+                    className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                  >
+                    Ver todas las lecturas recomendadas ({books.length}) →
+                  </Link>
+                </div>
+              ) : null}
             </section>
           );
         }
 
         if (type === 'Materiales de charlas') {
           const Icon = TYPE_ICONS[type];
+          const preview = [...talks]
+            .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+            .slice(0, PREVIEW_SIZE);
           return (
             <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
               <div className="flex items-center gap-3 border-b pb-4">
@@ -114,8 +135,18 @@ export function ResourceLibrary({ books, talks }: { books: Book[]; talks: Talk[]
                 <h2 className="text-xl font-black tracking-tight">{type}</h2>
               </div>
               <div className="mt-6">
-                <TalkList talks={talks} />
+                <TalkList talks={preview} />
               </div>
+              {talks.length > PREVIEW_SIZE ? (
+                <div className="mt-6 flex justify-center">
+                  <Link
+                    href="/recursos/materiales-de-charlas"
+                    className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                  >
+                    Ver todos los materiales de charlas ({talks.length}) →
+                  </Link>
+                </div>
+              ) : null}
             </section>
           );
         }

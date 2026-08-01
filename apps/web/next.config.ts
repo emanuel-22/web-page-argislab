@@ -29,6 +29,8 @@ const nextConfig: NextConfig = {
       { source: '/comunidad', destination: '/community' },
       { source: '/contenidos', destination: '/featured_contents' },
       { source: '/recursos', destination: '/useful_resources' },
+      { source: '/recursos/lecturas-recomendadas', destination: '/useful_resources/lecturas-recomendadas' },
+      { source: '/recursos/materiales-de-charlas', destination: '/useful_resources/materiales-de-charlas' },
     ];
   },
 };

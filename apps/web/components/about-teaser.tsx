@@ -16,9 +16,13 @@ export function AboutTeaser() {
         <h2 className="text-3xl font-black tracking-tight sm:text-4xl">¿Qué es Argis Lab?</h2>
 
         <p className="max-w-2xl text-lg font-light leading-relaxed text-muted-foreground">
-          Un espacio de aprendizaje, experimentación y comunidad orientado a la tecnología, la agilidad y la
-          inteligencia artificial aplicada — pensado para profesionales, estudiantes, docentes y equipos que quieren
-          incorporar estos cambios de forma práctica.
+          Argis Lab es una iniciativa creada y liderada por Emanuel Barboza que conecta ingeniería de software, 
+          agilidad e inteligencia artificial aplicada.
+
+          Es un espacio para compartir conocimiento, experimentar con nuevas ideas, documentar aprendizajes y colaborar
+          con profesionales, equipos y organizaciones que buscan construir mejores soluciones tecnológicas.
+
+          Con esto, la comunidad sigue presente, pero no define toda la identidad.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">

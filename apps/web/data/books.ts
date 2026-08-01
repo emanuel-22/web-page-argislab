@@ -8,6 +8,7 @@ export type Book = {
   href?: string;
   coverUrl?: string;
   topics: string[];
+  createdAt?: string;
 };
 
 export const CATEGORIES: { name: string; slug: string; icon: LucideIcon; subcategories: string[] }[] = [

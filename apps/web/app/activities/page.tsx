@@ -27,7 +27,6 @@ const CATEGORIES: { icon: typeof PlayCircle; title: string; talks: Talk[] }[] = 
   { icon: PlayCircle, title: 'Charlas anteriores', talks: TALKS },
   { icon: Calendar, title: 'Próximos encuentros', talks: [] },
   { icon: Hammer, title: 'Talleres', talks: [] },
-  { icon: GraduationCap, title: 'Clases abiertas', talks: [] },
   { icon: Users, title: 'Participaciones en comunidades', talks: [] },
 ];
 
@@ -66,8 +65,8 @@ export default function ActivitiesPage() {
       <header className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
         <h1 className="text-4xl font-black tracking-tight sm:text-5xl">Charlas y actividades</h1>
         <p className="text-lg leading-relaxed text-muted-foreground">
-          Charlas anteriores, próximos encuentros, talleres, clases abiertas y participaciones en comunidades de
-          Argis Lab.
+          Charlas, talleres, clases y encuentros en los que participo o que impulso desde Argis Lab, 
+          en colaboración con instituciones, eventos y comunidades.
         </p>
       </header>
 
