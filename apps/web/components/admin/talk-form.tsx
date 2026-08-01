@@ -2,11 +2,13 @@
 
 import { useState, type FormEvent } from 'react';
 import { Button } from '@repo/ui/components/button';
-import type { ApiTalk, TalkInput } from '@/lib/admin-api';
+import { CategoryTopicSelect } from '@/components/admin/category-topic-select';
+import type { ApiCategory, ApiTalk, TalkInput } from '@/lib/admin-api';
 
 const EMPTY_FORM = {
   title: '',
-  area: '',
+  categoryId: null as number | null,
+  topicIds: [] as number[],
   href: '',
   description: '',
   thumbnailUrl: '',
@@ -16,7 +18,8 @@ function toFormState(talk: ApiTalk | null) {
   if (!talk) return EMPTY_FORM;
   return {
     title: talk.title,
-    area: talk.area,
+    categoryId: talk.categoryId,
+    topicIds: talk.topics.map((t) => t.id),
     href: talk.href,
     description: talk.description ?? '',
     thumbnailUrl: talk.thumbnailUrl ?? '',
@@ -28,10 +31,12 @@ const inputClass =
 
 export function TalkForm({
   editingTalk,
+  categories,
   onSubmit,
   onCancel,
 }: {
   editingTalk: ApiTalk | null;
+  categories: ApiCategory[];
   onSubmit: (input: TalkInput) => Promise<void>;
   onCancel: () => void;
 }) {
@@ -50,8 +55,8 @@ export function TalkForm({
     e.preventDefault();
     setError(null);
 
-    if (!form.title.trim() || !form.area.trim() || !form.href.trim()) {
-      setError('Título, área y link son obligatorios.');
+    if (!form.title.trim() || !form.categoryId || !form.href.trim()) {
+      setError('Título, categoría y link son obligatorios.');
       return;
     }
 
@@ -59,7 +64,8 @@ export function TalkForm({
     try {
       await onSubmit({
         title: form.title.trim(),
-        area: form.area.trim(),
+        categoryId: form.categoryId,
+        topicIds: form.topicIds,
         href: form.href.trim(),
         description: form.description.trim() || undefined,
         thumbnailUrl: form.thumbnailUrl.trim() || undefined,
@@ -77,7 +83,7 @@ export function TalkForm({
       <h2 className="font-bold">{editingTalk ? `Editar: ${editingTalk.title}` : 'Agregar material de charla'}</h2>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="title" className="text-sm font-medium">
             Título *
           </label>
@@ -90,19 +96,13 @@ export function TalkForm({
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="area" className="text-sm font-medium">
-            Área *
-          </label>
-          <input
-            id="area"
-            className={inputClass}
-            placeholder="Agilidad y gestión"
-            value={form.area}
-            onChange={(e) => setForm({ ...form, area: e.target.value })}
-            required
-          />
-        </div>
+        <CategoryTopicSelect
+          categories={categories}
+          categoryId={form.categoryId}
+          topicIds={form.topicIds}
+          onCategoryChange={(categoryId) => setForm({ ...form, categoryId, topicIds: [] })}
+          onTopicIdsChange={(topicIds) => setForm({ ...form, topicIds })}
+        />
 
         <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="href" className="text-sm font-medium">

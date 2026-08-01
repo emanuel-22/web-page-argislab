@@ -1,6 +1,6 @@
 import { ArrayUnique, IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
-export class UpdateTalkDto {
+export class UpdateWebsiteDto {
   @IsOptional()
   @IsString()
   title?: string;

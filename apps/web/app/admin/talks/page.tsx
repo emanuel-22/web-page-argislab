@@ -7,11 +7,22 @@ import { Button } from '@repo/ui/components/button';
 import { AdminGuard } from '@/components/admin/admin-guard';
 import { AdminNav } from '@/components/admin/admin-nav';
 import { TalkForm } from '@/components/admin/talk-form';
-import { createTalk, deleteTalk, listTalks, logout, updateTalk, type ApiTalk, type TalkInput } from '@/lib/admin-api';
+import {
+  createTalk,
+  deleteTalk,
+  listCategories,
+  listTalks,
+  logout,
+  updateTalk,
+  type ApiCategory,
+  type ApiTalk,
+  type TalkInput,
+} from '@/lib/admin-api';
 
 function TalksAdmin() {
   const router = useRouter();
   const [talks, setTalks] = useState<ApiTalk[]>([]);
+  const [categories, setCategories] = useState<ApiCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [editingTalk, setEditingTalk] = useState<ApiTalk | null>(null);
@@ -19,8 +30,9 @@ function TalksAdmin() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await listTalks();
-      setTalks(data);
+      const [talksData, categoriesData] = await Promise.all([listTalks(), listCategories()]);
+      setTalks(talksData);
+      setCategories(categoriesData);
       setLoadError(null);
     } catch (err) {
       setLoadError(err instanceof Error ? err.message : 'No se pudieron cargar las charlas');
@@ -72,7 +84,12 @@ function TalksAdmin() {
       </div>
 
       <div className="mt-8">
-        <TalkForm editingTalk={editingTalk} onSubmit={handleCreateOrUpdate} onCancel={() => setEditingTalk(null)} />
+        <TalkForm
+          editingTalk={editingTalk}
+          categories={categories}
+          onSubmit={handleCreateOrUpdate}
+          onCancel={() => setEditingTalk(null)}
+        />
       </div>
 
       <div className="mt-10 flex flex-col gap-3">
@@ -89,7 +106,10 @@ function TalksAdmin() {
           <div key={talk.id} className="flex items-center justify-between gap-4 rounded-xl border bg-card p-4">
             <div className="min-w-0">
               <p className="truncate font-medium">{talk.title}</p>
-              <p className="truncate text-sm text-muted-foreground">{talk.area}</p>
+              <p className="truncate text-sm text-muted-foreground">
+                {talk.category.name}
+                {talk.topics.length > 0 ? ` · ${talk.topics.map((t) => t.name).join(', ')}` : ''}
+              </p>
             </div>
             <div className="flex shrink-0 gap-2">
               <Button size="sm" variant="outline" onClick={() => setEditingTalk(talk)}>

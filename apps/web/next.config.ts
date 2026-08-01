@@ -19,7 +19,9 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'www.penguinlibros.com'},
       { protocol: 'https', hostname: 'contentv2.tap-commerce.com'},
       { protocol: 'https', hostname: '**.static.prezi.com'},
-
+      { protocol: 'https', hostname: 'www.martinfowler.com'},
+      { protocol: 'https', hostname: 'refactoring.guru'},
+      { protocol: 'https', hostname: 'www.cleancoder.com'},
     ],
   },
   async rewrites() {
@@ -31,6 +33,7 @@ const nextConfig: NextConfig = {
       { source: '/recursos', destination: '/useful_resources' },
       { source: '/recursos/lecturas-recomendadas', destination: '/useful_resources/lecturas-recomendadas' },
       { source: '/recursos/materiales-de-charlas', destination: '/useful_resources/materiales-de-charlas' },
+      { source: '/recursos/paginas-web-recomendadas', destination: '/useful_resources/paginas-web-recomendadas' },
     ];
   },
 };

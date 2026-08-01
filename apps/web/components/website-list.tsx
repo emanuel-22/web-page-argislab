@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { Presentation } from 'lucide-react';
-import type { Talk } from '@/data/talks';
+import { Globe } from 'lucide-react';
+import type { Website } from '@/data/websites';
 
-function TalkCard({ title, category, href, description, thumbnailUrl, topics }: Talk) {
+function WebsiteCard({ title, category, href, description, thumbnailUrl, topics }: Website) {
   return (
     <a
       href={href}
@@ -15,7 +15,7 @@ function TalkCard({ title, category, href, description, thumbnailUrl, topics }: 
           <Image src={thumbnailUrl} alt={`Vista previa de ${title}`} fill sizes="400px" className="object-cover" />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <Presentation className="h-8 w-8 text-primary" />
+            <Globe className="h-8 w-8 text-primary" />
           </div>
         )}
       </div>
@@ -27,21 +27,21 @@ function TalkCard({ title, category, href, description, thumbnailUrl, topics }: 
         </span>
         <h3 className="font-bold leading-snug">{title}</h3>
         {description ? <p className="text-sm leading-relaxed text-muted-foreground">{description}</p> : null}
-        <span className="mt-2 text-sm font-medium text-primary">Ver charla →</span>
+        <span className="mt-2 text-sm font-medium text-primary">Visitar sitio →</span>
       </div>
     </a>
   );
 }
 
-export function TalkList({ talks }: { talks: Talk[] }) {
-  if (talks.length === 0) {
-    return <p className="text-sm text-muted-foreground">Todavía no hay materiales de charlas cargados.</p>;
+export function WebsiteList({ websites }: { websites: Website[] }) {
+  if (websites.length === 0) {
+    return <p className="text-sm text-muted-foreground">Todavía no hay páginas web cargadas.</p>;
   }
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {talks.map((talk) => (
-        <TalkCard key={talk.title} {...talk} />
+      {websites.map((website) => (
+        <WebsiteCard key={website.title} {...website} />
       ))}
     </div>
   );

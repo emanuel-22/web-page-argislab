@@ -24,26 +24,92 @@ model AdminUser {
   createdAt    DateTime @default(now())
 }
 
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  slug     String    @unique
+  topics   Topic[]
+  books    Book[]
+  talks    Talk[]
+  websites Website[]
+}
+
+model Topic {
+  id         Int      @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  books    BookTopic[]
+  talks    TalkTopic[]
+  websites WebsiteTopic[]
+
+  @@unique([categoryId, name])
+}
+
 model Book {
-  id        Int      @id @default(autoincrement())
-  title     String
-  category  String
-  author    String?
-  blurb     String?
-  href      String?
-  coverUrl  String?
-  topics    String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int         @id @default(autoincrement())
+  title      String
+  categoryId Int
+  category   Category    @relation(fields: [categoryId], references: [id])
+  author     String?
+  blurb      String?
+  href       String?
+  coverUrl   String?
+  topics     BookTopic[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model BookTopic {
+  bookId  Int
+  topicId Int
+  book    Book  @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  topic   Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([bookId, topicId])
 }
 
 model Talk {
-  id           Int      @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   title        String
-  area         String
+  categoryId   Int
+  category     Category    @relation(fields: [categoryId], references: [id])
   description  String?
   href         String
   thumbnailUrl String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  topics       TalkTopic[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model TalkTopic {
+  talkId  Int
+  topicId Int
+  talk    Talk  @relation(fields: [talkId], references: [id], onDelete: Cascade)
+  topic   Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([talkId, topicId])
+}
+
+model Website {
+  id           Int            @id @default(autoincrement())
+  title        String
+  categoryId   Int
+  category     Category       @relation(fields: [categoryId], references: [id])
+  description  String?
+  href         String
+  thumbnailUrl String?
+  topics       WebsiteTopic[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model WebsiteTopic {
+  websiteId Int
+  topicId   Int
+  website   Website @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  topic     Topic   @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([websiteId, topicId])
 }

@@ -1,24 +1,28 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
+export type ApiTopic = { id: number; name: string; categoryId: number };
+export type ApiCategory = { id: number; name: string; slug: string; topics: ApiTopic[] };
+
 export type ApiBook = {
   id: number;
   title: string;
-  category: string;
+  categoryId: number;
+  category: { id: number; name: string; slug: string };
   author: string | null;
   blurb: string | null;
   href: string | null;
   coverUrl: string | null;
-  topics: string[];
+  topics: ApiTopic[];
 };
 
 export type BookInput = {
   title: string;
-  category: string;
+  categoryId: number;
   author?: string;
   blurb?: string;
   href?: string;
   coverUrl?: string;
-  topics: string[];
+  topicIds: number[];
 };
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -56,6 +60,10 @@ export function me() {
   return request<{ email: string }>('/auth/me');
 }
 
+export function listCategories() {
+  return request<ApiCategory[]>('/categories');
+}
+
 export function listBooks() {
   return request<ApiBook[]>('/books');
 }
@@ -75,18 +83,21 @@ export function deleteBook(id: number) {
 export type ApiTalk = {
   id: number;
   title: string;
-  area: string;
+  categoryId: number;
+  category: { id: number; name: string; slug: string };
   href: string;
   description: string | null;
   thumbnailUrl: string | null;
+  topics: ApiTopic[];
 };
 
 export type TalkInput = {
   title: string;
-  area: string;
+  categoryId: number;
   href: string;
   description?: string;
   thumbnailUrl?: string;
+  topicIds: number[];
 };
 
 export function listTalks() {
@@ -103,4 +114,40 @@ export function updateTalk(id: number, input: TalkInput) {
 
 export function deleteTalk(id: number) {
   return request<void>(`/talks/${id}`, { method: 'DELETE' });
+}
+
+export type ApiWebsite = {
+  id: number;
+  title: string;
+  categoryId: number;
+  category: { id: number; name: string; slug: string };
+  href: string;
+  description: string | null;
+  thumbnailUrl: string | null;
+  topics: ApiTopic[];
+};
+
+export type WebsiteInput = {
+  title: string;
+  categoryId: number;
+  href: string;
+  description?: string;
+  thumbnailUrl?: string;
+  topicIds: number[];
+};
+
+export function listWebsites() {
+  return request<ApiWebsite[]>('/websites');
+}
+
+export function createWebsite(input: WebsiteInput) {
+  return request<ApiWebsite>('/websites', { method: 'POST', body: JSON.stringify(input) });
+}
+
+export function updateWebsite(id: number, input: WebsiteInput) {
+  return request<ApiWebsite>(`/websites/${id}`, { method: 'PUT', body: JSON.stringify(input) });
+}
+
+export function deleteWebsite(id: number) {
+  return request<void>(`/websites/${id}`, { method: 'DELETE' });
 }

@@ -1,10 +1,12 @@
 import Link from 'next/link';
-import { BookMarked, BookOpen, FileText, ListChecks, MessageSquare, Presentation, Wrench } from 'lucide-react';
+import { BookMarked, BookOpen, FileText, Globe, ListChecks, MessageSquare, Presentation, Wrench } from 'lucide-react';
 
 import { BookCard } from '@/components/reading-list';
 import { TalkList } from '@/components/talk-list';
+import { WebsiteList } from '@/components/website-list';
 import type { Book } from '@/data/books';
 import type { Talk } from '@/data/talks';
+import type { Website } from '@/data/websites';
 
 const PREVIEW_SIZE = 6;
 
@@ -16,6 +18,7 @@ const TYPES = [
   'Herramientas',
   'Materiales de charlas',
   'Lecturas recomendadas',
+  'Páginas web recomendadas',
 ] as const;
 
 const TYPE_SLUGS: Record<(typeof TYPES)[number], string> = {
@@ -26,6 +29,7 @@ const TYPE_SLUGS: Record<(typeof TYPES)[number], string> = {
   Herramientas: 'herramientas',
   'Materiales de charlas': 'materiales-de-charlas',
   'Lecturas recomendadas': 'lecturas-recomendadas',
+  'Páginas web recomendadas': 'paginas-web-recomendadas',
 };
 
 const TYPE_ICONS: Record<(typeof TYPES)[number], typeof FileText> = {
@@ -36,11 +40,15 @@ const TYPE_ICONS: Record<(typeof TYPES)[number], typeof FileText> = {
   Herramientas: Wrench,
   'Materiales de charlas': Presentation,
   'Lecturas recomendadas': BookMarked,
+  'Páginas web recomendadas': Globe,
 };
 
 type Resource = {
   title: string;
-  type: Exclude<(typeof TYPES)[number], 'Lecturas recomendadas' | 'Materiales de charlas'>;
+  type: Exclude<
+    (typeof TYPES)[number],
+    'Lecturas recomendadas' | 'Materiales de charlas' | 'Páginas web recomendadas'
+  >;
   area: string;
 };
 
@@ -73,7 +81,7 @@ function ResourceCard({ title, type, area }: Resource) {
   );
 }
 
-export function ResourceLibrary({ books, talks }: { books: Book[]; talks: Talk[] }) {
+export function ResourceLibrary({ books, talks, websites }: { books: Book[]; talks: Talk[]; websites: Website[] }) {
   return (
     <div className="flex flex-col gap-20">
       <nav className="flex flex-wrap justify-center gap-2">
@@ -144,6 +152,34 @@ export function ResourceLibrary({ books, talks }: { books: Book[]; talks: Talk[]
                     className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
                   >
                     Ver todos los materiales de charlas ({talks.length}) →
+                  </Link>
+                </div>
+              ) : null}
+            </section>
+          );
+        }
+
+        if (type === 'Páginas web recomendadas') {
+          const Icon = TYPE_ICONS[type];
+          const preview = [...websites]
+            .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+            .slice(0, PREVIEW_SIZE);
+          return (
+            <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
+              <div className="flex items-center gap-3 border-b pb-4">
+                <Icon className="h-5 w-5 text-primary" />
+                <h2 className="text-xl font-black tracking-tight">{type}</h2>
+              </div>
+              <div className="mt-6">
+                <WebsiteList websites={preview} />
+              </div>
+              {websites.length > PREVIEW_SIZE ? (
+                <div className="mt-6 flex justify-center">
+                  <Link
+                    href="/recursos/paginas-web-recomendadas"
+                    className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                  >
+                    Ver todas las páginas web recomendadas ({websites.length}) →
                   </Link>
                 </div>
               ) : null}

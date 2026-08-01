@@ -3,53 +3,51 @@
 import { useState, type FormEvent } from 'react';
 import { Button } from '@repo/ui/components/button';
 import { CategoryTopicSelect } from '@/components/admin/category-topic-select';
-import type { ApiBook, ApiCategory, BookInput } from '@/lib/admin-api';
+import type { ApiCategory, ApiWebsite, WebsiteInput } from '@/lib/admin-api';
 
 const EMPTY_FORM = {
   title: '',
   categoryId: null as number | null,
   topicIds: [] as number[],
-  author: '',
-  blurb: '',
   href: '',
-  coverUrl: '',
+  description: '',
+  thumbnailUrl: '',
 };
 
-function toFormState(book: ApiBook | null) {
-  if (!book) return EMPTY_FORM;
+function toFormState(website: ApiWebsite | null) {
+  if (!website) return EMPTY_FORM;
   return {
-    title: book.title,
-    categoryId: book.categoryId,
-    topicIds: book.topics.map((t) => t.id),
-    author: book.author ?? '',
-    blurb: book.blurb ?? '',
-    href: book.href ?? '',
-    coverUrl: book.coverUrl ?? '',
+    title: website.title,
+    categoryId: website.categoryId,
+    topicIds: website.topics.map((t) => t.id),
+    href: website.href,
+    description: website.description ?? '',
+    thumbnailUrl: website.thumbnailUrl ?? '',
   };
 }
 
 const inputClass =
   'rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50';
 
-export function BookForm({
-  editingBook,
+export function WebsiteForm({
+  editingWebsite,
   categories,
   onSubmit,
   onCancel,
 }: {
-  editingBook: ApiBook | null;
+  editingWebsite: ApiWebsite | null;
   categories: ApiCategory[];
-  onSubmit: (input: BookInput) => Promise<void>;
+  onSubmit: (input: WebsiteInput) => Promise<void>;
   onCancel: () => void;
 }) {
-  const [form, setForm] = useState(() => toFormState(editingBook));
+  const [form, setForm] = useState(() => toFormState(editingWebsite));
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [formKey, setFormKey] = useState(editingBook?.id ?? 'new');
+  const [formKey, setFormKey] = useState(editingWebsite?.id ?? 'new');
 
-  if ((editingBook?.id ?? 'new') !== formKey) {
-    setFormKey(editingBook?.id ?? 'new');
-    setForm(toFormState(editingBook));
+  if ((editingWebsite?.id ?? 'new') !== formKey) {
+    setFormKey(editingWebsite?.id ?? 'new');
+    setForm(toFormState(editingWebsite));
     setError(null);
   }
 
@@ -57,8 +55,8 @@ export function BookForm({
     e.preventDefault();
     setError(null);
 
-    if (!form.title.trim() || !form.categoryId) {
-      setError('Título y categoría son obligatorios.');
+    if (!form.title.trim() || !form.categoryId || !form.href.trim()) {
+      setError('Título, categoría y link son obligatorios.');
       return;
     }
 
@@ -68,14 +66,13 @@ export function BookForm({
         title: form.title.trim(),
         categoryId: form.categoryId,
         topicIds: form.topicIds,
-        author: form.author.trim() || undefined,
-        blurb: form.blurb.trim() || undefined,
-        href: form.href.trim() || undefined,
-        coverUrl: form.coverUrl.trim() || undefined,
+        href: form.href.trim(),
+        description: form.description.trim() || undefined,
+        thumbnailUrl: form.thumbnailUrl.trim() || undefined,
       });
-      if (!editingBook) setForm(EMPTY_FORM);
+      if (!editingWebsite) setForm(EMPTY_FORM);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'No se pudo guardar el libro');
+      setError(err instanceof Error ? err.message : 'No se pudo guardar la página web');
     } finally {
       setSaving(false);
     }
@@ -83,10 +80,10 @@ export function BookForm({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl border bg-card p-6">
-      <h2 className="font-bold">{editingBook ? `Editar: ${editingBook.title}` : 'Agregar lectura recomendada'}</h2>
+      <h2 className="font-bold">{editingWebsite ? `Editar: ${editingWebsite.title}` : 'Agregar página web recomendada'}</h2>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="title" className="text-sm font-medium">
             Título *
           </label>
@@ -99,18 +96,6 @@ export function BookForm({
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="author" className="text-sm font-medium">
-            Autor
-          </label>
-          <input
-            id="author"
-            className={inputClass}
-            value={form.author}
-            onChange={(e) => setForm({ ...form, author: e.target.value })}
-          />
-        </div>
-
         <CategoryTopicSelect
           categories={categories}
           categoryId={form.categoryId}
@@ -119,41 +104,48 @@ export function BookForm({
           onTopicIdsChange={(topicIds) => setForm({ ...form, topicIds })}
         />
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="href" className="text-sm font-medium">
-            Link (buscar el libro)
+            Link *
           </label>
           <input
             id="href"
             className={inputClass}
             value={form.href}
             onChange={(e) => setForm({ ...form, href: e.target.value })}
+            required
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="coverUrl" className="text-sm font-medium">
-            URL de la portada
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
+          <label htmlFor="thumbnailUrl" className="text-sm font-medium">
+            URL de la vista previa (imagen)
           </label>
           <input
-            id="coverUrl"
+            id="thumbnailUrl"
             className={inputClass}
-            value={form.coverUrl}
-            onChange={(e) => setForm({ ...form, coverUrl: e.target.value })}
+            placeholder="Dejalo vacío para tomarla automáticamente del link"
+            value={form.thumbnailUrl}
+            onChange={(e) => setForm({ ...form, thumbnailUrl: e.target.value })}
           />
+          {!editingWebsite ? (
+            <p className="text-xs text-muted-foreground">
+              Si lo dejás vacío, al crear la página intentamos sacar la imagen automáticamente del link de arriba.
+            </p>
+          ) : null}
         </div>
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="blurb" className="text-sm font-medium">
+        <label htmlFor="description" className="text-sm font-medium">
           Descripción
         </label>
         <textarea
-          id="blurb"
+          id="description"
           rows={3}
           className={inputClass}
-          value={form.blurb}
-          onChange={(e) => setForm({ ...form, blurb: e.target.value })}
+          value={form.description}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
       </div>
 
@@ -161,9 +153,9 @@ export function BookForm({
 
       <div className="flex gap-3">
         <Button type="submit" disabled={saving}>
-          {saving ? 'Guardando…' : editingBook ? 'Guardar cambios' : 'Agregar libro'}
+          {saving ? 'Guardando…' : editingWebsite ? 'Guardar cambios' : 'Agregar página web'}
         </Button>
-        {editingBook ? (
+        {editingWebsite ? (
           <Button type="button" variant="outline" onClick={onCancel}>
             Cancelar
           </Button>

@@ -6,36 +6,36 @@ import { Trash2 } from 'lucide-react';
 import { Button } from '@repo/ui/components/button';
 import { AdminGuard } from '@/components/admin/admin-guard';
 import { AdminNav } from '@/components/admin/admin-nav';
-import { BookForm } from '@/components/admin/book-form';
+import { WebsiteForm } from '@/components/admin/website-form';
 import {
-  createBook,
-  deleteBook,
-  listBooks,
+  createWebsite,
+  deleteWebsite,
   listCategories,
+  listWebsites,
   logout,
-  updateBook,
-  type ApiBook,
+  updateWebsite,
   type ApiCategory,
-  type BookInput,
+  type ApiWebsite,
+  type WebsiteInput,
 } from '@/lib/admin-api';
 
-function BooksAdmin() {
+function WebsitesAdmin() {
   const router = useRouter();
-  const [books, setBooks] = useState<ApiBook[]>([]);
+  const [websites, setWebsites] = useState<ApiWebsite[]>([]);
   const [categories, setCategories] = useState<ApiCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [editingBook, setEditingBook] = useState<ApiBook | null>(null);
+  const [editingWebsite, setEditingWebsite] = useState<ApiWebsite | null>(null);
 
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const [booksData, categoriesData] = await Promise.all([listBooks(), listCategories()]);
-      setBooks(booksData);
+      const [websitesData, categoriesData] = await Promise.all([listWebsites(), listCategories()]);
+      setWebsites(websitesData);
       setCategories(categoriesData);
       setLoadError(null);
     } catch (err) {
-      setLoadError(err instanceof Error ? err.message : 'No se pudieron cargar los libros');
+      setLoadError(err instanceof Error ? err.message : 'No se pudieron cargar las páginas web');
     } finally {
       setLoading(false);
     }
@@ -45,20 +45,20 @@ function BooksAdmin() {
     refresh();
   }, [refresh]);
 
-  async function handleCreateOrUpdate(input: BookInput) {
-    if (editingBook) {
-      await updateBook(editingBook.id, input);
-      setEditingBook(null);
+  async function handleCreateOrUpdate(input: WebsiteInput) {
+    if (editingWebsite) {
+      await updateWebsite(editingWebsite.id, input);
+      setEditingWebsite(null);
     } else {
-      await createBook(input);
+      await createWebsite(input);
     }
     await refresh();
   }
 
-  async function handleDelete(book: ApiBook) {
-    if (!confirm(`¿Borrar "${book.title}"?`)) return;
-    await deleteBook(book.id);
-    if (editingBook?.id === book.id) setEditingBook(null);
+  async function handleDelete(website: ApiWebsite) {
+    if (!confirm(`¿Borrar "${website.title}"?`)) return;
+    await deleteWebsite(website.id);
+    if (editingWebsite?.id === website.id) setEditingWebsite(null);
     await refresh();
   }
 
@@ -77,45 +77,45 @@ function BooksAdmin() {
       </div>
 
       <div className="mt-6">
-        <h1 className="text-3xl font-black tracking-tight">Lecturas recomendadas</h1>
+        <h1 className="text-3xl font-black tracking-tight">Páginas web recomendadas</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Se muestran en la página pública de Recursos → Lecturas recomendadas.
+          Se muestran en la página pública de Recursos → Páginas web recomendadas.
         </p>
       </div>
 
       <div className="mt-8">
-        <BookForm
-          editingBook={editingBook}
+        <WebsiteForm
+          editingWebsite={editingWebsite}
           categories={categories}
           onSubmit={handleCreateOrUpdate}
-          onCancel={() => setEditingBook(null)}
+          onCancel={() => setEditingWebsite(null)}
         />
       </div>
 
       <div className="mt-10 flex flex-col gap-3">
-        <h2 className="font-bold">Libros cargados ({books.length})</h2>
+        <h2 className="font-bold">Páginas web cargadas ({websites.length})</h2>
 
         {loading ? <p className="text-sm text-muted-foreground">Cargando…</p> : null}
         {loadError ? <p className="text-sm text-destructive">{loadError}</p> : null}
 
-        {!loading && !loadError && books.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Todavía no hay libros cargados.</p>
+        {!loading && !loadError && websites.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Todavía no hay páginas web cargadas.</p>
         ) : null}
 
-        {books.map((book) => (
-          <div key={book.id} className="flex items-center justify-between gap-4 rounded-xl border bg-card p-4">
+        {websites.map((website) => (
+          <div key={website.id} className="flex items-center justify-between gap-4 rounded-xl border bg-card p-4">
             <div className="min-w-0">
-              <p className="truncate font-medium">{book.title}</p>
+              <p className="truncate font-medium">{website.title}</p>
               <p className="truncate text-sm text-muted-foreground">
-                {book.category.name}
-                {book.topics.length > 0 ? ` · ${book.topics.map((t) => t.name).join(', ')}` : ''}
+                {website.category.name}
+                {website.topics.length > 0 ? ` · ${website.topics.map((t) => t.name).join(', ')}` : ''}
               </p>
             </div>
             <div className="flex shrink-0 gap-2">
-              <Button size="sm" variant="outline" onClick={() => setEditingBook(book)}>
+              <Button size="sm" variant="outline" onClick={() => setEditingWebsite(website)}>
                 Editar
               </Button>
-              <Button size="sm" variant="destructive" onClick={() => handleDelete(book)}>
+              <Button size="sm" variant="destructive" onClick={() => handleDelete(website)}>
                 <Trash2 />
               </Button>
             </div>
@@ -126,10 +126,10 @@ function BooksAdmin() {
   );
 }
 
-export default function AdminBooksPage() {
+export default function AdminWebsitesPage() {
   return (
     <AdminGuard>
-      <BooksAdmin />
+      <WebsitesAdmin />
     </AdminGuard>
   );
 }

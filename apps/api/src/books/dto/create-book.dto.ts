@@ -1,11 +1,11 @@
-import { ArrayNotEmpty, IsArray, IsOptional, IsString } from 'class-validator';
+import { ArrayUnique, IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class CreateBookDto {
   @IsString()
   title!: string;
 
-  @IsString()
-  category!: string;
+  @IsInt()
+  categoryId!: number;
 
   @IsOptional()
   @IsString()
@@ -23,8 +23,9 @@ export class CreateBookDto {
   @IsString()
   coverUrl?: string;
 
+  @IsOptional()
   @IsArray()
-  @ArrayNotEmpty()
-  @IsString({ each: true })
-  topics!: string[];
+  @ArrayUnique()
+  @IsInt({ each: true })
+  topicIds?: number[];
 }

@@ -1,11 +1,11 @@
-import { IsOptional, IsString } from 'class-validator';
+import { ArrayUnique, IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class CreateTalkDto {
   @IsString()
   title!: string;
 
-  @IsString()
-  area!: string;
+  @IsInt()
+  categoryId!: number;
 
   @IsString()
   href!: string;
@@ -17,4 +17,10 @@ export class CreateTalkDto {
   @IsOptional()
   @IsString()
   thumbnailUrl?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayUnique()
+  @IsInt({ each: true })
+  topicIds?: number[];
 }

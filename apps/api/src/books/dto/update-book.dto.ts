@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { ArrayUnique, IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class UpdateBookDto {
   @IsOptional()
@@ -6,8 +6,8 @@ export class UpdateBookDto {
   title?: string;
 
   @IsOptional()
-  @IsString()
-  category?: string;
+  @IsInt()
+  categoryId?: number;
 
   @IsOptional()
   @IsString()
@@ -27,6 +27,7 @@ export class UpdateBookDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  topics?: string[];
+  @ArrayUnique()
+  @IsInt({ each: true })
+  topicIds?: number[];
 }

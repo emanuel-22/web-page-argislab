@@ -1,8 +1,8 @@
 import { ResourceLibrary } from '@/components/resource-library';
-import { getBooks, getTalks } from '@/lib/resources';
+import { getBooks, getTalks, getWebsites } from '@/lib/resources';
 
 export default async function UsefulResourcePage() {
-  const [books, talks] = await Promise.all([getBooks(), getTalks()]);
+  const [books, talks, websites] = await Promise.all([getBooks(), getTalks(), getWebsites()]);
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8">
@@ -15,7 +15,7 @@ export default async function UsefulResourcePage() {
       </header>
 
       <div className="mt-16">
-        <ResourceLibrary books={books} talks={talks} />
+        <ResourceLibrary books={books} talks={talks} websites={websites} />
       </div>
     </main>
   );

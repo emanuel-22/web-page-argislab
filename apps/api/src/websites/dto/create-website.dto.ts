@@ -1,17 +1,14 @@
 import { ArrayUnique, IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
-export class UpdateTalkDto {
-  @IsOptional()
+export class CreateWebsiteDto {
   @IsString()
-  title?: string;
+  title!: string;
 
-  @IsOptional()
   @IsInt()
-  categoryId?: number;
+  categoryId!: number;
 
-  @IsOptional()
   @IsString()
-  href?: string;
+  href!: string;
 
   @IsOptional()
   @IsString()
