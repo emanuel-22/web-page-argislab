@@ -34,7 +34,7 @@ const SECONDARY_CHANNELS = [
 
 export default function CommunityPage() {
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-col items-center gap-16 px-6 py-20 text-center sm:px-8">
+    <main className="mx-auto flex w-full max-w-6xl flex-col items-center gap-16 px-6 py-20 text-center sm:px-8">
       <div className="flex flex-col items-center gap-6">
         <h1 className="text-4xl font-black tracking-tight sm:text-5xl">Comunidad</h1>
         <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">

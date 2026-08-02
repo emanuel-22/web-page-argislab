@@ -151,3 +151,45 @@ export function updateWebsite(id: number, input: WebsiteInput) {
 export function deleteWebsite(id: number) {
   return request<void>(`/websites/${id}`, { method: 'DELETE' });
 }
+
+export const PUBLICATION_TYPES = ['Conference Paper', 'Artículo'] as const;
+
+export type ApiPublication = {
+  id: number;
+  title: string;
+  categoryId: number;
+  category: { id: number; name: string; slug: string };
+  authors: string;
+  venue: string;
+  type: (typeof PUBLICATION_TYPES)[number];
+  year: string | null;
+  href: string;
+  topics: ApiTopic[];
+};
+
+export type PublicationInput = {
+  title: string;
+  categoryId: number;
+  authors: string;
+  venue: string;
+  type: (typeof PUBLICATION_TYPES)[number];
+  year?: string;
+  href: string;
+  topicIds: number[];
+};
+
+export function listPublications() {
+  return request<ApiPublication[]>('/publications');
+}
+
+export function createPublication(input: PublicationInput) {
+  return request<ApiPublication>('/publications', { method: 'POST', body: JSON.stringify(input) });
+}
+
+export function updatePublication(id: number, input: PublicationInput) {
+  return request<ApiPublication>(`/publications/${id}`, { method: 'PUT', body: JSON.stringify(input) });
+}
+
+export function deletePublication(id: number) {
+  return request<void>(`/publications/${id}`, { method: 'DELETE' });
+}

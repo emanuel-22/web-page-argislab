@@ -16,7 +16,7 @@ import { ModeToggle } from './mode-toggle';
 
 const NAV_ITEMS = [
   { label: 'Inicio', href: '/' },
-  { label: 'Contenidos', href: '/contenidos' },
+  { label: 'Contenido', href: '/contenidos' },
   { label: 'Recursos', href: '/recursos' },
   { label: 'Comunidad', href: '/comunidad' },
   { label: 'Actividades', href: '/actividades' },
@@ -31,7 +31,7 @@ export function Navbar() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight">
           <Image src="/logo.png" alt="Argis Lab" width={70} height={70} className="rounded-md" priority />
-          Emanuel Barboza | Argis Lab 
+          Emanuel Barboza   |   Argis Lab 
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

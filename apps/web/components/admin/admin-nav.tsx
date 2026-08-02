@@ -7,6 +7,7 @@ const LINKS = [
   { href: '/admin/books', label: 'Libros' },
   { href: '/admin/talks', label: 'Charlas' },
   { href: '/admin/websites', label: 'Páginas web' },
+  { href: '/admin/publications', label: 'Publicaciones' },
 ];
 
 export function AdminNav() {

@@ -25,13 +25,14 @@ model AdminUser {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  slug     String    @unique
-  topics   Topic[]
-  books    Book[]
-  talks    Talk[]
-  websites Website[]
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  slug         String        @unique
+  topics       Topic[]
+  books        Book[]
+  talks        Talk[]
+  websites     Website[]
+  publications Publication[]
 }
 
 model Topic {
@@ -40,9 +41,10 @@ model Topic {
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  books    BookTopic[]
-  talks    TalkTopic[]
-  websites WebsiteTopic[]
+  books        BookTopic[]
+  talks        TalkTopic[]
+  websites     WebsiteTopic[]
+  publications PublicationTopic[]
 
   @@unique([categoryId, name])
 }
@@ -112,4 +114,28 @@ model WebsiteTopic {
   topic     Topic   @relation(fields: [topicId], references: [id], onDelete: Cascade)
 
   @@id([websiteId, topicId])
+}
+
+model Publication {
+  id         Int                @id @default(autoincrement())
+  title      String
+  categoryId Int
+  category   Category           @relation(fields: [categoryId], references: [id])
+  authors    String
+  venue      String
+  type       String
+  year       String?
+  href       String
+  topics     PublicationTopic[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
+
+model PublicationTopic {
+  publicationId Int
+  topicId       Int
+  publication   Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  topic         Topic       @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([publicationId, topicId])
 }

@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/sobre', destination: '/about' },
       { source: '/actividades', destination: '/activities' },
+      { source: '/actividades/charlas-anteriores', destination: '/activities/charlas-anteriores' },
       { source: '/comunidad', destination: '/community' },
       { source: '/contenidos', destination: '/featured_contents' },
       { source: '/recursos', destination: '/useful_resources' },
