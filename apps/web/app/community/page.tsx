@@ -1,4 +1,5 @@
-import { Briefcase, GraduationCap, Link as LinkIcon, MessageCircle } from 'lucide-react';
+import NextLink from 'next/link';
+import { Briefcase, CalendarDays, GraduationCap, Link as LinkIcon, MessageCircle } from 'lucide-react';
 import { siInstagram } from 'simple-icons';
 
 import { Button } from '@repo/ui/components/button';
@@ -92,6 +93,26 @@ export default function CommunityPage() {
             </div>
           ))}
         </div>
+
+        <NextLink
+          href="/comunidad/eventos"
+          className="flex flex-col gap-4 rounded-xl border bg-card p-8 transition-colors hover:border-primary/50 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+              <CalendarDays className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="font-bold">Eventos Externos</h2>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Agenda de eventos de tecnología, agilidad e IA, nacionales e internacionales, presenciales y
+                virtuales. Curados por Argis Lab, organizados por terceros.
+              </p>
+            </div>
+          </div>
+
+          <span className="shrink-0 text-sm font-medium text-primary">Ver próximos eventos →</span>
+        </NextLink>
       </div>
     </main>
   );

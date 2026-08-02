@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/admin/talks', label: 'Charlas' },
   { href: '/admin/websites', label: 'Páginas web' },
   { href: '/admin/publications', label: 'Publicaciones' },
+  { href: '/admin/events', label: 'Eventos' },
 ];
 
 export function AdminNav() {

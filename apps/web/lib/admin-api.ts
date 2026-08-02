@@ -193,3 +193,61 @@ export function updatePublication(id: number, input: PublicationInput) {
 export function deletePublication(id: number) {
   return request<void>(`/publications/${id}`, { method: 'DELETE' });
 }
+
+export const EVENT_AUDIENCES = [
+  'Profesionales',
+  'Empresarios',
+  'Estudiantes',
+  'Académicos',
+  'Público general',
+] as const;
+
+export const EVENT_MODALITIES = ['Presencial', 'Virtual', 'Híbrido'] as const;
+
+export type ApiEvent = {
+  id: number;
+  title: string;
+  categoryId: number;
+  category: { id: number; name: string; slug: string };
+  description: string | null;
+  organizer: string;
+  startsAt: string;
+  endsAt: string | null;
+  modality: (typeof EVENT_MODALITIES)[number];
+  location: string | null;
+  audience: (typeof EVENT_AUDIENCES)[number][];
+  href: string;
+  thumbnailUrl: string | null;
+  topics: ApiTopic[];
+};
+
+export type EventInput = {
+  title: string;
+  categoryId: number;
+  description?: string;
+  organizer: string;
+  startsAt: string;
+  endsAt?: string;
+  modality?: (typeof EVENT_MODALITIES)[number];
+  location?: string;
+  audience?: (typeof EVENT_AUDIENCES)[number][];
+  href: string;
+  thumbnailUrl?: string;
+  topicIds: number[];
+};
+
+export function listEvents() {
+  return request<ApiEvent[]>('/events');
+}
+
+export function createEvent(input: EventInput) {
+  return request<ApiEvent>('/events', { method: 'POST', body: JSON.stringify(input) });
+}
+
+export function updateEvent(id: number, input: EventInput) {
+  return request<ApiEvent>(`/events/${id}`, { method: 'PUT', body: JSON.stringify(input) });
+}
+
+export function deleteEvent(id: number) {
+  return request<void>(`/events/${id}`, { method: 'DELETE' });
+}

@@ -1,4 +1,5 @@
 import { BOOKS, type Book } from '@/data/books';
+import { EVENTS, type Event } from '@/data/events';
 import { PUBLICATIONS, type Publication } from '@/data/publications';
 import { TALKS, type Talk } from '@/data/talks';
 import { WEBSITES, type Website } from '@/data/websites';
@@ -195,5 +196,44 @@ export async function getWebsites(): Promise<Website[]> {
     }));
   } catch {
     return WEBSITES;
+  }
+}
+
+export async function getEvents(): Promise<Event[]> {
+  try {
+    const res = await fetch(`${API_URL}/events`, { next: { revalidate: 60 } });
+    if (!res.ok) throw new Error(`API respondió ${res.status}`);
+
+    const apiEvents: {
+      title: string;
+      category: ApiCategory;
+      organizer: string;
+      startsAt: string;
+      endsAt: string | null;
+      modality: 'Presencial' | 'Virtual' | 'Híbrido';
+      location: string | null;
+      audience: string[];
+      href: string;
+      description: string | null;
+      thumbnailUrl: string | null;
+      topics: ApiTopic[];
+    }[] = await res.json();
+
+    return apiEvents.map((event) => ({
+      title: event.title,
+      category: event.category.name,
+      organizer: event.organizer,
+      startsAt: event.startsAt,
+      endsAt: event.endsAt ?? undefined,
+      modality: event.modality,
+      location: event.location ?? undefined,
+      audience: event.audience,
+      href: event.href,
+      description: event.description ?? undefined,
+      thumbnailUrl: event.thumbnailUrl ?? undefined,
+      topics: event.topics.map((topic) => topic.name),
+    }));
+  } catch {
+    return EVENTS;
   }
 }

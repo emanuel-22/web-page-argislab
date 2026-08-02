@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
       { source: '/actividades', destination: '/activities' },
       { source: '/actividades/charlas-anteriores', destination: '/activities/charlas-anteriores' },
       { source: '/comunidad', destination: '/community' },
+      { source: '/comunidad/eventos', destination: '/community/eventos' },
       { source: '/contenidos', destination: '/featured_contents' },
       { source: '/recursos', destination: '/useful_resources' },
       { source: '/recursos/lecturas-recomendadas', destination: '/useful_resources/lecturas-recomendadas' },

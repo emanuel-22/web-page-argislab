@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 import { CategoriesModule } from './categories/categories.module';
+import { EventsModule } from './events/events.module';
 import { InstagramModule } from './instagram/instagram.module';
 import { MediumModule } from './medium/medium.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -24,6 +25,7 @@ import { YoutubeModule } from './youtube/youtube.module';
     MediumModule,
     YoutubeModule,
     PublicationsModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
