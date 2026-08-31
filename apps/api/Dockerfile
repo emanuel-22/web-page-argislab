@@ -12,6 +12,6 @@ COPY . .
 
 RUN npm run build --workspace=api
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD ["npm", "run", "start:prod", "--workspace=api"]
