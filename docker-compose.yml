@@ -1,4 +1,7 @@
-version: '3.8'
+# Entorno LOCAL de desarrollo.
+# Los valores se toman del archivo .env de la raíz (no versionado).
+# Si no existe .env, se usan los defaults de abajo para que `docker compose up`
+# funcione sin configuración previa.
 
 services:
   postgres:
@@ -6,9 +9,9 @@ services:
     container_name: postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-web_page_argislab}
     ports:
       - '5432:5432'
     volumes:
@@ -19,8 +22,8 @@ services:
     container_name: pgadmin
     restart: unless-stopped
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@argislab.com
-      PGADMIN_DEFAULT_PASSWORD: adminargis
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@argislab.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-adminargis}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
       - '5050:80'

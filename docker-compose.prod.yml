@@ -1,0 +1,41 @@
+# Entorno de PRODUCCIÓN (VPS).
+#
+# Diferencias con docker-compose.yml (local):
+#   - NO se publica el puerto de PostgreSQL hacia Internet.
+#     La base solo es accesible desde la red interna de Docker (otros contenedores).
+#   - NO hay pgAdmin.
+#   - Todas las variables son obligatorias: si falta una en el .env del servidor,
+#     el arranque falla (no hay defaults).
+#
+# Uso en el servidor:
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# Si necesitás administrar la base desde tu máquina, hacé un túnel SSH:
+#   ssh -L 5432:localhost:5432 usuario@vps
+# y descomentá el bloque "ports" de abajo atado a 127.0.0.1.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?falta POSTGRES_USER en .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD en .env}
+      POSTGRES_DB: ${POSTGRES_DB:?falta POSTGRES_DB en .env}
+    # Sin "ports": Postgres NO queda expuesto a Internet.
+    # Solo accesible por nombre de servicio "postgres" dentro de la red de Docker.
+    #
+    # ports:
+    #   - '127.0.0.1:5432:5432'   # solo si necesitás túnel SSH
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  postgres_data:
