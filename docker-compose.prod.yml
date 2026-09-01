@@ -69,17 +69,14 @@ services:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
-
+      args: 
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     container_name: argislab-web
     restart: unless-stopped
-
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
-
     ports:
       - '8000:3000'
-
     depends_on:
       - api
 
