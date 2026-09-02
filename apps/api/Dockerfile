@@ -18,7 +18,8 @@ RUN npm ci
 COPY . .
 
 # Generar Prisma Client antes de compilar la API
-RUN npm run build --workspace=@repo/prisma
+RUN DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public" \
+    npm run build --workspace=@repo/prisma
 
 # Compilar API
 RUN npm run build --workspace=api
