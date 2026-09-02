@@ -2,11 +2,15 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY apps/web/package*.json ./apps/web/
-COPY packages/ui/package*.json ./packages/ui/
+COPY package.json package-lock.json ./
 
-RUN npm install
+COPY apps/web/package.json ./apps/web/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
+COPY packages/typescript-config/package.json ./packages/typescript-config/package.json
+COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
+COPY packages/prisma/package.json ./packages/prisma/package.json
+
+RUN npm ci
 
 COPY . .
 
