@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Code2, RefreshCw, Sparkles } from 'lucide-react';
+import { Code2, Mail, RefreshCw, Sparkles } from 'lucide-react';
 
 import { Button } from '@repo/ui/components/button';
 import { HeroBackground } from '@/components/hero-background';
@@ -65,13 +65,26 @@ const AREAS = [
 export default function Home() {
   return (
     <div>
+      <div className="border-b bg-card/50">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-6 py-2.5 text-sm sm:px-8">
+          <span className="text-muted-foreground">¿Trabajamos juntos? Escribime a</span>
+          <a
+            href="mailto:emanuelbarboza5@gmail.com"
+            className="link-underline inline-flex items-center gap-1.5 font-medium text-primary"
+          >
+            <Mail className="h-3.5 w-3.5" />
+            emanuelbarboza5@gmail.com
+          </a>
+        </div>
+      </div>
+
       <div className="relative isolate overflow-hidden">
         <HeroBackground />
 
         <main className="relative mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-7xl items-center gap-12 px-6 py-24 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div className="flex flex-col items-center gap-8 text-center lg:items-start lg:text-left">
             <h1 className="animate-in fade-in slide-in-from-bottom-4 text-4xl font-black tracking-tight text-balance duration-700 sm:text-6xl">
-              Tecnología, agilidad e <span className="text-primary">inteligencia artificial</span> desde la teoría a la práctica.
+              Tecnología, Agilidad e <span className="text-primary">Inteligencia Artificial</span> desde la teoría a la práctica.
             </h1>
 
             <p className="animate-in fade-in slide-in-from-bottom-4 max-w-2xl text-lg leading-relaxed text-foreground/80 delay-150 duration-700 sm:text-xl">
@@ -80,10 +93,10 @@ export default function Home() {
 
             <div className="animate-in fade-in slide-in-from-bottom-4 flex flex-wrap items-center justify-center gap-4 delay-300 duration-700 lg:justify-start">
               <Button size="lg" className="font-normal" asChild>
-                <Link href="/contenidos">Explorar contenidos</Link>
+                <Link href="/recursos">Ver recursos</Link>
               </Button>
               <Button size="lg" variant="outline" className="font-normal" asChild>
-                <Link href="/comunidad">Trabajemos juntos</Link>
+                <Link href="/comunidad">Sumate a la comunidad</Link>
               </Button>
             </div>
           </div>
@@ -103,9 +116,9 @@ export default function Home() {
         </main>
       </div>
 
-      <section className="border-t">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-24 sm:px-8">
-          <p className="mx-auto max-w-2xl text-center text-lg leading-relaxed text-muted-foreground">
+      <section className="border-t bg-surface">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-16 sm:px-8 sm:py-20">
+          <p className="mx-auto max-w-2xl text-center text-lg leading-relaxed text-muted-foreground" data-reveal>
             Organizamos todo lo que compartimos en Argis Lab en tres áreas principales.
           </p>
 

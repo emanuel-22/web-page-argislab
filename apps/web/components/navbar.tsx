@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 
 import { Button } from '@repo/ui/components/button';
@@ -16,7 +17,8 @@ import { ModeToggle } from './mode-toggle';
 
 const NAV_ITEMS = [
   { label: 'Inicio', href: '/' },
-  { label: 'Explorar', href: '/contenidos' },
+  { label: 'Recursos', href: '/recursos' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Actividades', href: '/actividades' },
   { label: 'Comunidad', href: '/comunidad' },
   { label: 'Argis Lab', href: '/sobre' },
@@ -24,9 +26,23 @@ const NAV_ITEMS = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <header
+      className={`sticky top-0 z-50 w-full border-b transition-all duration-200 ${
+        scrolled
+          ? 'border-border bg-background/80 shadow-sm backdrop-blur-md'
+          : 'border-transparent bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60'
+      }`}
+    >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 sm:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight">
           <Image src="/logo.png" alt="Argis Lab" width={70} height={70} className="rounded-md" priority />
@@ -45,7 +61,7 @@ export function Navbar() {
                   isActive ? 'font-medium text-foreground' : 'text-muted-foreground'
                 }`}
               >
-                {item.label}
+                <span className={isActive ? undefined : 'link-underline'}>{item.label}</span>
                 {isActive && (
                   <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary" aria-hidden="true" />
                 )}

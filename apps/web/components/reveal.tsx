@@ -25,9 +25,10 @@ export function Reveal({ children, from = 'bottom', delay = 0, className = '' }:
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Re-run every time the element enters or leaves the viewport
-        // (scrolling up and down replays the animation).
-        setShown(Boolean(entry?.isIntersecting));
+        if (entry?.isIntersecting) {
+          setShown(true);
+          observer.disconnect();
+        }
       },
       { threshold: 0.2 },
     );

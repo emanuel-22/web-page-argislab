@@ -1,59 +1,63 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, PlayCircle } from 'lucide-react';
+import { ArrowRight, CalendarDays } from 'lucide-react';
 
-import { PastTalkCard } from '@/components/past-talk-card';
-import { UpcomingEventsCarousel, type UpcomingEvent } from '@/components/upcoming-events-carousel';
+import { TalksTimeline } from '@/components/talks-timeline';
 import { PAST_TALKS } from '@/data/past-talks';
 
-const PREVIEW_SIZE = 6;
-const UPCOMING_EVENTS: UpcomingEvent[] = [];
+export const metadata = {
+  title: 'Charlas y actividades · Argis Lab',
+  description: 'Charlas, encuentros y actividades en las que participo o que impulso desde Argis Lab.',
+};
 
 export default function ActivitiesPage() {
-  const previewTalks = PAST_TALKS.slice(0, PREVIEW_SIZE);
-
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8">
-      <header className="mx-auto flex max-w-3xl flex-col gap-6 text-center">
-        <h1 className="text-4xl font-black tracking-tight sm:text-5xl">Charlas y actividades</h1>
-        <p className="text-lg leading-relaxed text-muted-foreground">
-          Charlas, encuentros y actividades en las que participo o que impulso desde Argis Lab, en colaboración con
-          instituciones, eventos y comunidades.
-        </p>
+    <main className="mx-auto w-full max-w-4xl px-6 py-12 sm:px-8 sm:py-16">
+      <header className="grid items-center gap-8 lg:grid-cols-[1fr_auto]" data-reveal>
+        <div className="flex max-w-2xl flex-col gap-4">
+          <h1 className="text-4xl font-black tracking-tight sm:text-5xl">Charlas y actividades</h1>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            Charlas, encuentros y actividades en las que participo o que impulso desde Argis Lab, en colaboración con
+            instituciones, eventos y comunidades.
+          </p>
+        </div>
+        <Image
+          src="/animation/para_charlas.webp"
+          alt=""
+          width={640}
+          height={480}
+          priority
+          className="mx-auto w-full max-w-64 lg:max-w-xs xl:max-w-sm"
+        />
       </header>
 
-      <div className="mt-16 flex flex-col gap-16">
-        <section>
-          <div className="flex items-center gap-3 border-b pb-4">
-            <Calendar className="h-5 w-5 text-primary" />
-            <h2 className="text-xl font-black tracking-tight">Próximos encuentros</h2>
+      <Link
+        href="/comunidad/eventos"
+        className="group mt-10 flex flex-col justify-between gap-3 rounded-2xl border bg-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg sm:flex-row sm:items-center"
+        data-reveal
+      >
+        <div className="flex items-start gap-3">
+          <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+          <div>
+            <h2 className="font-bold">Próximos encuentros</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Los anuncio acá y en la comunidad. Mientras tanto, en la agenda hay eventos externos de tecnología,
+              agilidad e IA.
+            </p>
           </div>
-          <UpcomingEventsCarousel events={UPCOMING_EVENTS} />
-        </section>
+        </div>
+        <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary">
+          Ver la agenda <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </Link>
 
-        <section>
-          <div className="flex items-center gap-3 border-b pb-4">
-            <PlayCircle className="h-5 w-5 text-primary" />
-            <h2 className="text-xl font-black tracking-tight">Charlas anteriores</h2>
-          </div>
-
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {previewTalks.map((talk) => (
-              <PastTalkCard key={talk.videoId} {...talk} />
-            ))}
-          </div>
-
-          {PAST_TALKS.length > PREVIEW_SIZE ? (
-            <div className="mt-6 flex justify-center">
-              <Link
-                href="/actividades/charlas-anteriores"
-                className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
-              >
-                Ver todas las charlas anteriores ({PAST_TALKS.length}) →
-              </Link>
-            </div>
-          ) : null}
-        </section>
-      </div>
+      <section className="mt-14" data-reveal>
+        <h2 className="text-2xl font-black tracking-tight sm:text-3xl">Charlas anteriores</h2>
+        <p className="mt-3 mb-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          Charlas y presentaciones grabadas en las que participé, de la más reciente a la más antigua.
+        </p>
+        <TalksTimeline talks={PAST_TALKS} />
+      </section>
     </main>
   );
 }

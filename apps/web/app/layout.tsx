@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Navbar } from '@/components/navbar';
+import { ScrollReveal } from '@/components/scroll-reveal';
 
 export const metadata: Metadata = {
   title: 'Argis Lab',
@@ -20,10 +21,11 @@ export default function RootLayout({
         <body>
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="light"
             enableSystem={false}
             disableTransitionOnChange
           >
+            <ScrollReveal />
             <Navbar />
             {children}
           </ThemeProvider>

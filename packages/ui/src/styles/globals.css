@@ -8,25 +8,31 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
-  --foreground: #111111;
+  --foreground: #161616;
   --card: #ffffff;
-  --card-foreground: #111111;
+  --card-foreground: #161616;
   --popover: #ffffff;
-  --popover-foreground: #111111;
+  --popover-foreground: #161616;
   --primary: #b50d0d;
   --primary-foreground: #ffffff;
-  --secondary: #f2f2f2;
-  --secondary-foreground: #111111;
-  --muted: #f2f2f2;
-  --muted-foreground: #3d3d3d;
-  --accent: #ddebff;
-  --accent-foreground: #111111;
+  --secondary: #f8f8f7;
+  --secondary-foreground: #161616;
+  --muted: #f8f8f7;
+  --muted-foreground: #666666;
+  --accent: #fbeaea;
+  --accent-foreground: #7a0a0a;
   --destructive: #7a0a0a;
   --destructive-foreground: #ffffff;
   --border: #e5e5e5;
   --input: #e5e5e5;
   --ring: #b50d0d;
+  /* Fondo alternativo para romper el blanco entre secciones. */
+  --surface: #f8f8f7;
+  --surface-foreground: #161616;
+  /* Rojo muy suave para fondos / realces. */
+  --primary-soft: #fbeaea;
   --chart-1: #b50d0d;
   --chart-2: #afc5dc;
   --chart-3: #7a0a0a;
@@ -44,6 +50,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: #111111;
   --foreground: #f5f5f5;
   --card: #1a1a1a;
@@ -63,6 +70,9 @@
   --border: #2a2a2a;
   --input: #2a2a2a;
   --ring: #b50d0d;
+  --surface: #171717;
+  --surface-foreground: #f5f5f5;
+  --primary-soft: #2a1414;
   --chart-1: #b50d0d;
   --chart-2: #afc5dc;
   --chart-3: #ddebff;
@@ -87,6 +97,9 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);

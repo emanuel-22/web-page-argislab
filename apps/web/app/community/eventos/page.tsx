@@ -11,7 +11,7 @@ export default function EventosPage() {
     .sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-20 sm:px-8">
+    <main className="mx-auto w-full max-w-5xl px-6 py-12 sm:px-8 sm:py-16">
       <Link href="/comunidad" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" />
         Volver a Comunidad
@@ -26,7 +26,7 @@ export default function EventosPage() {
         </p>
       </header>
 
-      <div className="mt-16">
+      <div className="mt-10 sm:mt-12">
         <EventList events={upcoming} />
       </div>
     </main>

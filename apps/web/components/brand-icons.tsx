@@ -1,4 +1,4 @@
-import { siInstagram, siWhatsapp } from 'simple-icons';
+import { siInstagram, siWhatsapp, siYoutube } from 'simple-icons';
 
 type IconProps = { className?: string };
 
@@ -6,6 +6,14 @@ export function WhatsappIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
       <path d={siWhatsapp.path} />
+    </svg>
+  );
+}
+
+export function YoutubeIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d={siYoutube.path} />
     </svg>
   );
 }
@@ -31,4 +39,5 @@ export const BRAND_COLORS = {
   whatsapp: '#25D366',
   instagram: '#E1306C',
   linkedin: '#0A66C2',
+  youtube: '#FF0000',
 } as const;

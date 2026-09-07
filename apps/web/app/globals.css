@@ -44,3 +44,129 @@ body {
     animation: none;
   }
 }
+
+/* ── Aparición suave de secciones al hacer scroll ───────────────────────
+   Sin JS todo se ve normal. Con JS, <ScrollReveal /> agrega `.reveal-ready`
+   a <html> y va marcando `.is-visible` cuando cada bloque entra en viewport
+   (se re-dispara al subir y bajar). */
+.reveal-ready [data-reveal]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+[data-reveal] {
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal]:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+  [data-reveal] {
+    transition: none;
+  }
+}
+
+/* ── Subrayado rojo que crece en links de texto ──────────────────────── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ── Tipografía de artículo (blog) ───────────────────────────────────── */
+.prose-article {
+  color: var(--foreground);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose-article > * + * {
+  margin-top: 1.25rem;
+}
+.prose-article h2 {
+  margin-top: 2.75rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 6rem;
+}
+.prose-article h3 {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  scroll-margin-top: 6rem;
+}
+.prose-article a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.prose-article ul,
+.prose-article ol {
+  padding-left: 1.5rem;
+}
+.prose-article ul {
+  list-style: disc;
+}
+.prose-article ol {
+  list-style: decimal;
+}
+.prose-article li + li {
+  margin-top: 0.4rem;
+}
+.prose-article blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+.prose-article :not(pre) > code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.9em;
+}
+.prose-article pre {
+  background: #161616;
+  color: #f5f5f5;
+  border-radius: 0.75rem;
+  padding: 1.15rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.prose-article pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.prose-article img {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+}
+.prose-article figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}

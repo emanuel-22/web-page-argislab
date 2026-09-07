@@ -9,7 +9,15 @@ import type { Book } from '@/data/books';
 const SCROLL_AMOUNT = 360;
 const AUTO_SCROLL_SPEED = 0.4; // px por frame (~24px/s a 60fps): movimiento lento
 
-export function BookShowcase({ books, autoScroll = false }: { books: Book[]; autoScroll?: boolean }) {
+export function BookShowcase({
+  books,
+  autoScroll = false,
+  layout = 'scroller',
+}: {
+  books: Book[];
+  autoScroll?: boolean;
+  layout?: 'scroller' | 'grid';
+}) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<Book | null>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -121,43 +129,59 @@ export function BookShowcase({ books, autoScroll = false }: { books: Book[]; aut
     return <p className="text-sm text-muted-foreground">Todavía no hay libros cargados.</p>;
   }
 
+  const isGrid = layout === 'grid';
+
   return (
     <div>
-      <div className="flex items-center justify-end gap-2">
-        <button
-          type="button"
-          onClick={() => scrollBy(-SCROLL_AMOUNT)}
-          disabled={!canLeft}
-          aria-label="Anteriores"
-          className="flex h-9 w-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollBy(SCROLL_AMOUNT)}
-          disabled={!canRight}
-          aria-label="Siguientes"
-          className="flex h-9 w-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
-      </div>
+      {!isGrid ? (
+        <div className="flex items-center justify-end gap-2">
+          <button
+            type="button"
+            onClick={() => scrollBy(-SCROLL_AMOUNT)}
+            disabled={!canLeft}
+            aria-label="Anteriores"
+            className="flex h-9 w-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(SCROLL_AMOUNT)}
+            disabled={!canRight}
+            aria-label="Siguientes"
+            className="flex h-9 w-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      ) : null}
 
       <div
         ref={scrollerRef}
-        className={`mt-4 flex gap-5 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-          autoScroll ? '' : 'snap-x'
-        }`}
+        className={
+          isGrid
+            ? 'grid gap-5 sm:grid-cols-2 lg:grid-cols-3'
+            : `mt-4 flex gap-5 overflow-x-auto pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+                autoScroll ? '' : 'snap-x'
+              }`
+        }
       >
         {books.map((book) => (
           <button
             key={book.title}
             type="button"
             onClick={() => setSelected(book)}
-            className={`group flex w-36 shrink-0 flex-col gap-3 text-left ${autoScroll ? '' : 'snap-start'}`}
+            className={`group text-left ${
+              isGrid
+                ? 'flex gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg'
+                : `flex w-36 shrink-0 flex-col gap-3 ${autoScroll ? '' : 'snap-start'}`
+            }`}
           >
-            <div className="relative aspect-2/3 w-full overflow-hidden rounded-lg border bg-linear-to-b from-primary/15 to-transparent shadow-sm transition-transform group-hover:-translate-y-1 group-hover:shadow-lg">
+            <div
+              className={`relative aspect-2/3 shrink-0 overflow-hidden rounded-lg border bg-linear-to-b from-primary/15 to-transparent shadow-sm ${
+                isGrid ? 'w-20 sm:w-24' : 'w-full transition-transform group-hover:-translate-y-1 group-hover:shadow-lg'
+              }`}
+            >
               {book.coverUrl ? (
                 <Image
                   src={book.coverUrl}
@@ -173,12 +197,22 @@ export function BookShowcase({ books, autoScroll = false }: { books: Book[]; aut
                 </div>
               )}
             </div>
-            <div className="flex flex-col gap-0.5">
+            <div className={`flex min-w-0 flex-col ${isGrid ? 'gap-1' : 'gap-0.5'}`}>
+              {isGrid ? (
+                <span className="text-xs font-medium text-muted-foreground">{book.category}</span>
+              ) : null}
               <span className="line-clamp-2 text-sm font-bold leading-snug group-hover:text-primary">
                 {book.title}
               </span>
               {book.author ? (
-                <span className="line-clamp-1 text-xs text-muted-foreground">{book.author}</span>
+                <span className={`text-xs text-muted-foreground ${isGrid ? '' : 'line-clamp-1'}`}>
+                  {book.author}
+                </span>
+              ) : null}
+              {isGrid ? (
+                <span className="mt-auto pt-2 text-sm font-medium text-primary group-hover:underline">
+                  Ver detalle →
+                </span>
               ) : null}
             </div>
           </button>
