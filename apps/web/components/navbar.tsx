@@ -18,7 +18,9 @@ import { ModeToggle } from './mode-toggle';
 const NAV_ITEMS = [
   { label: 'Inicio', href: '/' },
   { label: 'Recursos', href: '/recursos' },
-  { label: 'Blog', href: '/blog' },
+  // El blog queda oculto del menú por ahora. Las páginas siguen existiendo en
+  // /blog y /blog/[slug]; para reactivarlo, descomentá esta línea.
+  // { label: 'Blog', href: '/blog' },
   { label: 'Actividades', href: '/actividades' },
   { label: 'Comunidad', href: '/comunidad' },
   { label: 'Argis Lab', href: '/sobre' },

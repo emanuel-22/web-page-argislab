@@ -6,12 +6,14 @@ import { BOOKS } from '@/data/books';
 import { PRESENTATIONS } from '@/data/presentations';
 import { PUBLICATIONS } from '@/data/publications';
 import { WEBSITES } from '@/data/websites';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Recursos · Argis Lab',
+export const metadata = pageMetadata({
+  title: 'Recursos',
   description:
-    'Libros, materiales de charlas, páginas de referencia y publicaciones que reúno y comparto desde Argis Lab.',
-};
+    'Libros recomendados, materiales de charlas, páginas de referencia y publicaciones académicas que reúno y comparto desde Argis Lab.',
+  path: '/recursos',
+});
 
 const RESEARCHGATE_PROFILE = 'https://www.researchgate.net/profile/Emanuel-Barboza-2';
 

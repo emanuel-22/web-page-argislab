@@ -4,11 +4,14 @@ import { ArrowRight, CalendarDays } from 'lucide-react';
 
 import { TalksTimeline } from '@/components/talks-timeline';
 import { PAST_TALKS } from '@/data/past-talks';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Charlas y actividades · Argis Lab',
-  description: 'Charlas, encuentros y actividades en las que participo o que impulso desde Argis Lab.',
-};
+export const metadata = pageMetadata({
+  title: 'Charlas y actividades',
+  description:
+    'Charlas, encuentros y actividades en las que participo o que impulso desde Argis Lab, en colaboración con instituciones, eventos y comunidades.',
+  path: '/actividades',
+});
 
 export default function ActivitiesPage() {
   return (

@@ -2,6 +2,14 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { WebsiteList } from '@/components/website-list';
 import { WEBSITES } from '@/data/websites';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'Páginas web recomendadas',
+  description:
+    'Sitios, herramientas y blogs de referencia sobre facilitación de actividades, retrospectivas, prácticas de agilidad e ingeniería de software.',
+  path: '/recursos/paginas-web-recomendadas',
+});
 
 export default function PaginasWebRecomendadasPage() {
   const websites = WEBSITES;

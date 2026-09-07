@@ -2,10 +2,14 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 import { PresentationsGrid } from '@/components/presentations-grid';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Materiales de charlas · Argis Lab',
-};
+export const metadata = pageMetadata({
+  title: 'Materiales de charlas',
+  description:
+    'Slides y presentaciones de charlas y talleres sobre agilidad, ingeniería de software e inteligencia artificial aplicada.',
+  path: '/recursos/materiales-de-charlas',
+});
 
 export default function MaterialesDeCharlasPage() {
   return (

@@ -3,12 +3,14 @@ import { ArrowLeft, Quote } from 'lucide-react';
 
 import { ReadingList } from '@/components/reading-list';
 import { BOOKS } from '@/data/books';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Libros recomendados · Argis Lab',
+export const metadata = pageMetadata({
+  title: 'Libros recomendados',
   description:
-    'Una biblioteca personal de libros sobre ingeniería de software, agilidad, liderazgo, producto e inteligencia artificial.',
-};
+    'Una biblioteca personal de libros sobre ingeniería de software, agilidad, liderazgo, producto e inteligencia artificial, agrupados por categoría y tema.',
+  path: '/recursos/libros-recomendados',
+});
 
 export default function LibrosRecomendadosPage() {
   const books = BOOKS;

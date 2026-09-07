@@ -13,6 +13,10 @@ RUN npm ci
 
 COPY . .
 
+# Dominio de producción (canonical, sitemap, Open Graph). Se hornea en el build.
+ARG NEXT_PUBLIC_SITE_URL=https://argislab.com
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+
 RUN npm run build --workspace=web
 
 EXPOSE 3000

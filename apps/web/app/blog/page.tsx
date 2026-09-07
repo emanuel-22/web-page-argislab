@@ -2,11 +2,15 @@ import Image from 'next/image';
 
 import { BlogIndex } from '@/components/blog/blog-index';
 import { FEATURED_POST, POSTS } from '@/data/posts';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Artículos · Argis Lab',
+// Blog oculto por ahora: accesible por URL pero fuera del menú y sin indexar.
+export const metadata = pageMetadata({
+  title: 'Artículos',
   description: 'Ideas, aprendizajes y experiencias sobre ingeniería de software, agilidad e inteligencia artificial.',
-};
+  path: '/blog',
+  noindex: true,
+});
 
 export default function BlogPage() {
   return (

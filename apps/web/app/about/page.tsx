@@ -12,10 +12,14 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-export const metadata = {
-  title: '¿Qué es Argis Lab? · Argis Lab',
-  description: 'Un laboratorio para explorar, aprender y construir alrededor de la tecnología, la agilidad y la IA.',
-};
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: '¿Qué es Argis Lab?',
+  description:
+    'Un laboratorio para explorar, aprender y construir alrededor de la ingeniería de software, la agilidad y la inteligencia artificial. Quién está detrás y qué se hace desde Argis Lab.',
+  path: '/sobre',
+});
 
 const EMANUEL_SITE = 'https://emanuelbarboza.com';
 

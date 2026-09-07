@@ -11,6 +11,9 @@ services:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
+      args:
+        # Dominio real del sitio (canonical, sitemap, Open Graph). Cambialo si no es este.
+        NEXT_PUBLIC_SITE_URL: https://argislab.com
     container_name: argislab-web
     restart: unless-stopped
     environment:

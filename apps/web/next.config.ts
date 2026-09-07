@@ -29,6 +29,16 @@ const nextConfig: NextConfig = {
       { source: '/contenidos/libros-recomendados', destination: '/recursos/libros-recomendados', permanent: true },
       // "Charlas anteriores" se integró en /actividades como línea de tiempo.
       { source: '/actividades/charlas-anteriores', destination: '/actividades', permanent: true },
+      // Las rutas internas en inglés existen por los rewrites: redirigimos a la
+      // URL canónica en español para evitar contenido duplicado.
+      { source: '/about', destination: '/sobre', permanent: true },
+      { source: '/activities', destination: '/actividades', permanent: true },
+      { source: '/community', destination: '/comunidad', permanent: true },
+      { source: '/community/eventos', destination: '/comunidad/eventos', permanent: true },
+      { source: '/resources', destination: '/recursos', permanent: true },
+      { source: '/resources/libros-recomendados', destination: '/recursos/libros-recomendados', permanent: true },
+      { source: '/resources/materiales-de-charlas', destination: '/recursos/materiales-de-charlas', permanent: true },
+      { source: '/resources/paginas-web-recomendadas', destination: '/recursos/paginas-web-recomendadas', permanent: true },
     ];
   },
 };

@@ -2,6 +2,14 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { EventList } from '@/components/event-list';
 import { EVENTS } from '@/data/events';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'Eventos externos',
+  description:
+    'Agenda de eventos de tecnología, agilidad e inteligencia artificial en Argentina y el mundo, presenciales y virtuales, curados por Argis Lab.',
+  path: '/comunidad/eventos',
+});
 
 export default function EventosPage() {
   const events = EVENTS;

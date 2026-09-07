@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { ArrowRight, Briefcase, CalendarDays, GraduationCap, MessageCircle } from 'lucide-react';
 
 import { InstagramIcon, LinkedinIcon, WhatsappIcon, YoutubeIcon } from '@/components/brand-icons';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Comunidad · Argis Lab',
-  description: 'Una comunidad para compartir oportunidades, aprender y conversar sobre tecnología, agilidad e IA.',
-};
+export const metadata = pageMetadata({
+  title: 'Comunidad',
+  description:
+    'Una comunidad para compartir oportunidades, aprender juntos y conversar sobre tecnología, agilidad e inteligencia artificial. Sumate al grupo de WhatsApp.',
+  path: '/comunidad',
+});
 
 const MAIN_WHATSAPP = 'https://chat.whatsapp.com/GrFpQi2xCam4EBBG7UzYdl';
 

@@ -5,6 +5,24 @@ import { Button } from '@repo/ui/components/button';
 import { HeroBackground } from '@/components/hero-background';
 import { HeroPhotoCarousel } from '@/components/hero-photo-carousel';
 import { Reveal } from '@/components/reveal';
+import { SITE } from '@/lib/site';
+
+const HOME_DESCRIPTION =
+  'Argis Lab, el espacio de Emanuel Barboza para compartir conocimiento, desarrollar proyectos y explorar nuevas formas de construir tecnología: ingeniería de software, agilidad e IA aplicada.';
+
+export const metadata = {
+  title: { absolute: SITE.defaultTitle },
+  description: HOME_DESCRIPTION,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website' as const,
+    siteName: SITE.name,
+    locale: SITE.locale,
+    url: SITE.url,
+    title: SITE.defaultTitle,
+    description: HOME_DESCRIPTION,
+  },
+};
 
 const CARD_REVEAL: Array<'left' | 'bottom' | 'right'> = ['left', 'bottom', 'right'];
 

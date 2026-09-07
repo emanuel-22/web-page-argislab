@@ -7,6 +7,7 @@ import { ArticleShare } from '@/components/blog/article-share';
 import { ArticleToc } from '@/components/blog/article-toc';
 import { PostCard } from '@/components/blog/post-card';
 import { formatPostDateLong, getPost, POSTS, relatedPosts } from '@/data/posts';
+import { pageMetadata } from '@/lib/seo';
 
 export function generateStaticParams() {
   return POSTS.map((post) => ({ slug: post.slug }));
@@ -16,10 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return {
-    title: `${post.meta.title} · Argis Lab`,
+  // Blog oculto por ahora: accesible por URL pero fuera del menú y sin indexar.
+  return pageMetadata({
+    title: post.meta.title,
     description: post.meta.excerpt,
-  };
+    path: `/blog/${post.meta.slug}`,
+    noindex: true,
+  });
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
