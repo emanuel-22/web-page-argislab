@@ -26,7 +26,7 @@ export function HeroPhotoCarousel() {
   }, []);
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded-4xl border bg-card shadow-xl">
+    <div className="relative aspect-square w-full overflow-hidden rounded-4xl border bg-card shadow-2xl">
       {PHOTOS.map((photo, index) => (
         <Image
           key={photo.src}

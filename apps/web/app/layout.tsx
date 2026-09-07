@@ -18,7 +18,12 @@ export default function RootLayout({
       <html lang="es" suppressHydrationWarning>
         <head />
         <body>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
             <Navbar />
             {children}
           </ThemeProvider>

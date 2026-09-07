@@ -1,5 +1,5 @@
 import { siMedium } from 'simple-icons';
-import type { MediumPost } from '@/lib/resources';
+import type { MediumPost } from '@/data/medium';
 
 const MEDIUM_PROFILE_URL = 'https://medium.com/@emabarboza';
 

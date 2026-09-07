@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { WebsiteList } from '@/components/website-list';
-import { getWebsites } from '@/lib/resources';
+import { WEBSITES } from '@/data/websites';
 
-export default async function PaginasWebRecomendadasPage() {
-  const websites = await getWebsites();
+export default function PaginasWebRecomendadasPage() {
+  const websites = WEBSITES;
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8">
-      <Link href="/recursos" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+      <Link href="/contenidos" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" />
-        Volver a Recursos
+        Volver a Explorar
       </Link>
 
       <header className="mx-auto mt-6 flex max-w-3xl flex-col gap-6 text-center">

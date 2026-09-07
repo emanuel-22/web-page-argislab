@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { EventList } from '@/components/event-list';
-import { getEvents } from '@/lib/resources';
+import { EVENTS } from '@/data/events';
 
-export default async function EventosPage() {
-  const events = await getEvents();
+export default function EventosPage() {
+  const events = EVENTS;
   const now = Date.now();
   const upcoming = events
     .filter((event) => new Date(event.endsAt ?? event.startsAt).getTime() >= now)

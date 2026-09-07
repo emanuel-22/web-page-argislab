@@ -2,26 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
+    // Las portadas de libros ahora son locales (apps/web/public/covers/).
+    // Estos hosts quedan para imágenes que siguen siendo remotas:
     remotePatterns: [
-      { protocol: 'https', hostname: 'i.ytimg.com' },
-      { protocol: 'https', hostname: 'covers.openlibrary.org' },
-      { protocol: 'https', hostname: 'm.media-amazon.com' },
-      { protocol: 'https', hostname: 'luchosalazar.com' },
-      { protocol: 'https', hostname: 'http2.mlstatic.com'},
-      { protocol: 'https', hostname: 'media.licdn.com'},
-      { protocol: 'https', hostname: 'www.yumpu.com'},
-      { protocol: 'https', hostname: 'encrypted-tbn0.gstatic.com'},
-      { protocol: 'https', hostname: 'blog.nicopaez.com'},
-      { protocol: 'https', hostname: 'encrypted-tbn0.gstatic.com'},   
-      { protocol: 'https', hostname: 'imgv2-2-f.scribdassets.com'}, 
-      { protocol: 'https', hostname: 'images.cdn1.buscalibre.com'},   
-      { protocol: 'https', hostname: 'website-assets.studocu.com'},
-      { protocol: 'https', hostname: 'www.penguinlibros.com'},
-      { protocol: 'https', hostname: 'contentv2.tap-commerce.com'},
-      { protocol: 'https', hostname: '**.static.prezi.com'},
-      { protocol: 'https', hostname: 'www.martinfowler.com'},
-      { protocol: 'https', hostname: 'refactoring.guru'},
-      { protocol: 'https', hostname: 'www.cleancoder.com'},
+      { protocol: 'https', hostname: 'i.ytimg.com' }, // miniaturas de YouTube
+      { protocol: 'https', hostname: '**.static.prezi.com' }, // previews de Prezi (charlas)
+      { protocol: 'https', hostname: 'media.licdn.com' }, // 1 portada pendiente de bajar a mano
     ],
   },
   async rewrites() {
@@ -32,8 +18,8 @@ const nextConfig: NextConfig = {
       { source: '/comunidad', destination: '/community' },
       { source: '/comunidad/eventos', destination: '/community/eventos' },
       { source: '/contenidos', destination: '/featured_contents' },
+      { source: '/contenidos/libros-recomendados', destination: '/featured_contents/libros-recomendados' },
       { source: '/recursos', destination: '/useful_resources' },
-      { source: '/recursos/lecturas-recomendadas', destination: '/useful_resources/lecturas-recomendadas' },
       { source: '/recursos/materiales-de-charlas', destination: '/useful_resources/materiales-de-charlas' },
       { source: '/recursos/paginas-web-recomendadas', destination: '/useful_resources/paginas-web-recomendadas' },
     ];

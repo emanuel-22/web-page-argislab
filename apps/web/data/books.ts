@@ -5,6 +5,8 @@ export type Book = {
   category: string;
   author?: string;
   blurb?: string;
+  /** Descripción más larga de qué trata el libro, para la vista ampliada. */
+  longDescription?: string;
   href?: string;
   coverUrl?: string;
   topics: string[];
@@ -77,8 +79,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Robert C. Martin',
     blurb: 'Principios y prácticas para escribir código legible, mantenible y de calidad.',
+    longDescription:
+      'El clásico de Robert C. Martin sobre qué distingue al código bueno del malo. Recorre nombres, funciones, comentarios, formato, manejo de errores, límites entre módulos y pruebas unitarias, y cierra con una colección de "code smells" y refactors. La idea central: escribir código es un acto de comunicación, y dejarlo un poco mejor de como lo encontraste (la regla del Boy Scout) es lo que mantiene sano un sistema en el tiempo.',
     href: 'https://www.google.com/search?tbm=bks&q=Clean+Code+Robert+C.+Martin',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8065615-L.jpg',
+    coverUrl: '/covers/clean-code.webp',
     topics: ['Programación'],
   },
   {
@@ -86,8 +90,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Niklas Modig y Pär Åhlström',
     blurb: 'Cómo equilibrar eficiencia de recursos y eficiencia de flujo en equipos y organizaciones.',
+    longDescription:
+      'Modig y Åhlström explican Lean sin jerga: la diferencia entre estar ocupado (eficiencia de recursos) y entregar valor rápido (eficiencia de flujo), por qué optimizar recursos suele generar más trabajo en curso, esperas y "necesidades secundarias", y cómo la ley de Little y la variación explican los tiempos de entrega. Termina con la "estrella del norte" del flujo y qué significa realmente adoptar una cultura Lean.',
     href: 'https://www.google.com/search?tbm=bks&q=Esto+es+Lean+Niklas+Modig',
-    coverUrl: 'https://m.media-amazon.com/images/I/41HFkdheEKL._SY445_SX342_QL70_FMwebp_.jpg',
+    coverUrl: '/covers/esto-es-lean.webp',
     topics: ['Lean', 'Agilidad'],
   },
   {
@@ -96,7 +102,7 @@ export const BOOKS: Book[] = [
     author: 'Robin Sharma',
     blurb: 'Una mirada sobre el liderazgo que no depende de un título ni de una posición jerárquica.',
     href: 'https://www.google.com/search?tbm=bks&q=El+l%C3%ADder+que+no+ten%C3%ADa+cargo+Robin+Sharma',
-    coverUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbRro9kS6yTKOIQ6fJRi83LiCDPqXJvyjmtBO7xwcfFLBaq4TADx16lC4&s=10',
+    coverUrl: '/covers/el-lider-que-no-tenia-cargo.webp',
     topics: ['Liderazgo'],
   },
   {
@@ -106,7 +112,7 @@ export const BOOKS: Book[] = [
     blurb:
       'Cómo transformar a un grupo en un conjunto ganador y la importancia de la visión compartida, la actitud y la unión de talentos.',
     href: 'https://www.google.com/search?tbm=bks&q=17+leyes+incuestionables+del+trabajo+en+equipo+John+Maxwell',
-    coverUrl: 'https://covers.openlibrary.org/b/id/7275825-L.jpg',
+    coverUrl: '/covers/las-17-leyes-incuestionables-del-trabajo-en-equipo.webp',
     topics: ['Trabajo en equipo', 'Liderazgo'],
   },
   {
@@ -115,7 +121,7 @@ export const BOOKS: Book[] = [
     author: 'Masaki Ishiguro',
     blurb: 'Pequeños hábitos de la cultura japonesa para mejorar el día a día.',
     href: 'https://www.google.com/search?tbm=bks&q=25+h%C3%A1bitos+japoneses+para+vivir+mejor+Masaki+Ishiguro',
-    coverUrl: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1601491628i/55519506.jpg',
+    coverUrl: '/covers/25-habitos-japoneses-para-vivir-mejor.webp',
     topics: ['Bienestar'],
   },
   {
@@ -124,7 +130,7 @@ export const BOOKS: Book[] = [
     author: 'Philippe Kruchten, Robert Nord e Ipek Ozkaya',
     blurb: 'Cómo identificar, priorizar y gestionar la deuda técnica en proyectos de software.',
     href: 'https://www.google.com/search?tbm=bks&q=Managing+Technical+Debt+Kruchten+Nord+Ozkaya',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8798031-L.jpg',
+    coverUrl: '/covers/managing-technical-debt.webp',
     topics: ['Deuda técnica'],
   },
   {
@@ -133,7 +139,7 @@ export const BOOKS: Book[] = [
     author: 'Robert Greene',
     blurb: 'Un análisis de las dinámicas de poder e influencia a lo largo de la historia.',
     href: 'https://www.google.com/search?tbm=bks&q=Las+48+leyes+del+poder+Robert+Greene',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13482302-L.jpg',
+    coverUrl: '/covers/las-48-leyes-del-poder.webp',
     topics: ['Estrategia'],
   },
   {
@@ -142,7 +148,7 @@ export const BOOKS: Book[] = [
     author: 'Guy Kawasaki',
     blurb: 'Una guía práctica para emprendedores sobre cómo lanzar y hacer crecer un proyecto.',
     href: 'https://www.google.com/search?tbm=bks&q=El+arte+de+empezar+Guy+Kawasaki',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8097779-L.jpg',
+    coverUrl: '/covers/el-arte-de-empezar.webp',
     topics: ['Emprendimiento'],
   },
   {
@@ -151,7 +157,7 @@ export const BOOKS: Book[] = [
     author: 'Eckhart Tolle',
     blurb: 'Un camino hacia la realización espiritual a través de la atención plena en el presente.',
     href: 'https://www.google.com/search?tbm=bks&q=El+poder+del+ahora+Eckhart+Tolle',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8074884-L.jpg',
+    coverUrl: '/covers/el-poder-del-ahora.webp',
     topics: ['Propósito', 'Bienestar'],
   },
   {
@@ -160,7 +166,7 @@ export const BOOKS: Book[] = [
     author: 'Héctor García y Francesc Miralles',
     blurb: 'Los secretos japoneses para una vida larga y con propósito.',
     href: 'https://www.google.com/search?tbm=bks&q=Ikigai+Hector+Garcia+Francesc+Miralles',
-    coverUrl: 'https://covers.openlibrary.org/b/id/11300391-L.jpg',
+    coverUrl: '/covers/ikigai.webp',
     topics: ['Propósito', 'Bienestar'],
   },
   {
@@ -168,8 +174,10 @@ export const BOOKS: Book[] = [
     category: PRO,
     author: 'John Doerr',
     blurb: 'Cómo Google, Bono y la Fundación Gates cambian el mundo con OKR.',
+    longDescription:
+      'John Doerr cuenta cómo llevó los OKR (Objectives and Key Results) de Intel a Google y a decenas de organizaciones. Un objetivo es el qué (ambicioso, memorable); los key results son el cómo se mide (concretos, verificables). El libro insiste en foco, alineación transparente, seguimiento y stretch goals, y suma los CFR (conversaciones, feedback y reconocimiento) como el sistema de gestión de desempeño que acompaña a los OKR.',
     href: 'https://www.google.com/search?tbm=bks&q=Mide+lo+que+importa+John+Doerr',
-    coverUrl: 'https://covers.openlibrary.org/b/id/12331552-L.jpg',
+    coverUrl: '/covers/mide-lo-que-importa.webp',
     topics: ['OKR'],
   },
   {
@@ -177,8 +185,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Eliyahu M. Goldratt y Jeff Cox',
     blurb: 'Una novela sobre teoría de las restricciones y mejora continua de procesos.',
+    longDescription:
+      'Alex Rogo tiene tres meses para salvar su planta. A través de esa historia, Goldratt enseña la Teoría de las Restricciones: todo sistema tiene un cuello de botella que define su capacidad, y mejorar en otro lado es una ilusión. Presenta los cinco pasos de focalización y una definición incómoda pero clara de "meta": ganar dinero ahora y en el futuro. Base conceptual de mucho del pensamiento ágil y DevOps posterior.',
     href: 'https://www.google.com/search?tbm=bks&q=La+meta+Eliyahu+Goldratt',
-    coverUrl: 'https://covers.openlibrary.org/b/id/682721-L.jpg',
+    coverUrl: '/covers/la-meta.webp',
     topics: ['Mejora continua'],
   },
   {
@@ -187,7 +197,7 @@ export const BOOKS: Book[] = [
     author: 'Marcus Hammarberg y Joakim Sundén',
     blurb: 'Una guía práctica para implementar Kanban en equipos de software.',
     href: 'https://www.google.com/search?tbm=bks&q=Kanban+in+Action+Hammarberg+Sunden',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8514391-L.jpg',
+    coverUrl: '/covers/kanban-in-action.webp',
     topics: ['Kanban'],
   },
   {
@@ -196,7 +206,7 @@ export const BOOKS: Book[] = [
     author: 'David J. Anderson',
     blurb: 'El libro fundacional del método Kanban aplicado a equipos de tecnología.',
     href: 'https://www.google.com/search?tbm=bks&q=Kanban+David+J+Anderson',
-    coverUrl: 'https://covers.openlibrary.org/b/id/7273224-L.jpg',
+    coverUrl: '/covers/kanban-cambio-evolutivo-exitoso-para-su-negocio-en-tecnologia.webp',
     topics: ['Kanban'],
   },
   {
@@ -205,7 +215,7 @@ export const BOOKS: Book[] = [
     author: 'Francesco Cirillo',
     blurb: 'El método para gestionar el tiempo que cambió la forma de trabajar de millones de personas.',
     href: 'https://www.google.com/search?tbm=bks&q=La+t%C3%A9cnica+Pomodoro+Francesco+Cirillo',
-    coverUrl: 'https://covers.openlibrary.org/b/id/10095659-L.jpg',
+    coverUrl: '/covers/la-tecnica-pomodoro.webp',
     topics: ['Gestión del tiempo'],
   },
   {
@@ -214,7 +224,7 @@ export const BOOKS: Book[] = [
     author: 'Robert K. Greenleaf',
     blurb: 'Un recorrido por la naturaleza del poder legítimo y la grandeza a través del liderazgo de servicio.',
     href: 'https://www.google.com/search?tbm=bks&q=Servant+Leadership+Robert+Greenleaf',
-    coverUrl: 'https://covers.openlibrary.org/b/id/592685-L.jpg',
+    coverUrl: '/covers/servant-leadership.webp',
     topics: ['Liderazgo'],
   },
   {
@@ -223,7 +233,7 @@ export const BOOKS: Book[] = [
     author: 'Stephen R. Covey',
     blurb: 'Del autor de "Los 7 hábitos de la gente altamente efectiva", sobre liderar desde principios sólidos.',
     href: 'https://www.google.com/search?tbm=bks&q=El+liderazgo+centrado+en+principios+Stephen+Covey',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13662454-L.jpg',
+    coverUrl: '/covers/el-liderazgo-centrado-en-principios.webp',
     topics: ['Liderazgo'],
   },
   {
@@ -232,7 +242,7 @@ export const BOOKS: Book[] = [
     author: 'Elisabeth Kübler-Ross',
     blurb: 'Una reflexión sobre el sentido de la vida, la muerte y el crecimiento personal.',
     href: 'https://www.google.com/search?tbm=bks&q=La+rueda+de+la+vida+Elisabeth+Kubler+Ross',
-    coverUrl: 'https://covers.openlibrary.org/b/id/2270498-L.jpg',
+    coverUrl: '/covers/la-rueda-de-la-vida.webp',
     topics: ['Desarrollo personal'],
   },
   {
@@ -241,7 +251,7 @@ export const BOOKS: Book[] = [
     author: 'Álex Rovira y Fernando Trías de Bes',
     blurb: 'Claves de la prosperidad, contadas a través de una fábula sobre el trébol de cuatro hojas.',
     href: 'https://www.google.com/search?tbm=bks&q=La+buena+suerte+Alex+Rovira+Trias+de+Bes',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13563518-L.jpg',
+    coverUrl: '/covers/la-buena-suerte.webp',
     topics: ['Desarrollo personal'],
   },
   {
@@ -250,7 +260,7 @@ export const BOOKS: Book[] = [
     author: 'Allen B. Downey, Jeffrey Elkner y Chris Meyers',
     blurb: 'Un curso introductorio a la programación y las ciencias de la computación usando Python.',
     href: 'https://www.google.com/search?tbm=bks&q=How+to+think+like+a+computer+scientist+Python+Downey',
-    coverUrl: 'https://covers.openlibrary.org/b/id/736943-L.jpg',
+    coverUrl: '/covers/aprenda-a-pensar-como-un-programador-con-python.webp',
     topics: ['Programación'],
   },
   {
@@ -258,8 +268,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Jurgen Appelo',
     blurb: 'Cómo liderar equipos ágiles y desarrollar líderes ágiles, más allá de la gestión tradicional.',
+    longDescription:
+      'Jurgen Appelo mira la gestión desde la teoría de la complejidad y propone seis "vistas": energizar personas, empoderar equipos, alinear restricciones, desarrollar competencias, hacer crecer la estructura y mejorar todo. Más que un método, es una caja de herramientas y prácticas (delegation poker, moving motivators, kudo cards) para que la agilidad no se quede solo en el equipo de desarrollo.',
     href: 'https://www.google.com/search?tbm=bks&q=Management+3.0+Jurgen+Appelo',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8054347-L.jpg',
+    coverUrl: '/covers/management-3-0.webp',
     topics: ['Agilidad', 'Gestión del cambio'],
   },
   {
@@ -268,7 +280,7 @@ export const BOOKS: Book[] = [
     author: 'Jorge Abad y Lucho Salazar',
     blurb: 'Cómo escribir y trabajar con historias de usuario en equipos ágiles.',
     href: 'https://www.google.com/search?tbm=bks&q=Historias+de+usuario+una+visi%C3%B3n+pragm%C3%A1tica+Jorge+Abad',
-    coverUrl: 'https://luchosalazar.com/wp-content/uploads/2025/10/portada-historias-de-usuario-volumen-2-es-eslogan-foto-06_le_upscale_balanced_x4-2.png',
+    coverUrl: '/covers/historias-de-usuario-una-vision-pragmatica.webp',
     topics: ['Requisitos'],
   },
   {
@@ -277,7 +289,7 @@ export const BOOKS: Book[] = [
     author: 'Carlos Martín Pérez (compilador)',
     blurb: 'Un repaso por los estratagemas clásicos chinos y su aplicación práctica.',
     href: 'https://www.google.com/search?tbm=bks&q=36+estrategias+chinas+Carlos+Martin+Perez',
-    coverUrl: 'https://covers.openlibrary.org/b/id/2000451-L.jpg',
+    coverUrl: '/covers/36-estrategias-chinas.webp',
     topics: ['Estrategia'],
   },
   {
@@ -286,7 +298,7 @@ export const BOOKS: Book[] = [
     author: 'Mike Rother y Gerd Aulinger',
     blurb: 'Cómo construir capacidad organizacional y mentalidad de mejora continua a través del coaching Kata.',
     href: 'https://www.google.com/search?tbm=bks&q=Toyota+Kata+Culture+Mike+Rother+Gerd+Aulinger',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13799538-L.jpg',
+    coverUrl: '/covers/toyota-kata-culture.webp',
     topics: ['Mejora continua'],
   },
   {
@@ -295,7 +307,7 @@ export const BOOKS: Book[] = [
     author: 'Daniel Goleman',
     blurb: 'El ensayo clásico de Harvard Business Review sobre inteligencia emocional y liderazgo.',
     href: 'https://www.google.com/search?tbm=bks&q=What+Makes+a+Leader+Daniel+Goleman',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8850311-L.jpg',
+    coverUrl: '/covers/what-makes-a-leader.webp',
     topics: ['Liderazgo'],
   },
   {
@@ -304,7 +316,7 @@ export const BOOKS: Book[] = [
     author: 'Brian Tracy',
     blurb: 'De la Biblioteca del Éxito: técnicas prácticas para pensar con más creatividad.',
     href: 'https://www.google.com/search?tbm=bks&q=Creatividad+y+resoluci%C3%B3n+de+problemas+Brian+Tracy',
-    coverUrl: 'https://http2.mlstatic.com/D_NQ_NP_989003-MLA76519232876_052024-O.webp',
+    coverUrl: '/covers/creatividad-y-resolucion-de-problemas.webp',
     topics: ['Pensamiento'],
   },
   {
@@ -313,7 +325,7 @@ export const BOOKS: Book[] = [
     author: 'Steve Allen',
     blurb: 'Estrategias prácticas para dejar de postergar y pasar a la acción.',
     href: 'https://www.google.com/search?tbm=bks&q=Como+vencer+el+miedo+dejar+de+procrastinar+Steve+Allen',
-    coverUrl: 'https://m.media-amazon.com/images/I/51kDje26boL._SY445_SX342_FMwebp_.jpg',
+    coverUrl: '/covers/como-vencer-el-miedo-dejar-de-procrastinar-y-convertirse-en-una-persona-de-accion.webp',
     topics: ['Productividad'],
   },
   {
@@ -322,7 +334,7 @@ export const BOOKS: Book[] = [
     author: 'Alejandro Chávez Castillo',
     blurb: 'Una introducción práctica a Kanban para quienes recién empiezan.',
     href: 'https://www.google.com/search?tbm=bks&q=Kanban+Alejandro+Chavez+Castillo',
-    coverUrl: 'https://m.media-amazon.com/images/I/41USybzvf3L._SY445_SX342_QL70_FMwebp_.jpg',
+    coverUrl: '/covers/kanban.webp',
     topics: ['Kanban'],
   },
   {
@@ -340,7 +352,7 @@ export const BOOKS: Book[] = [
     author: 'Harvard Business Review Press',
     blurb: 'De la serie Guías HBR: herramientas prácticas para priorizar y gestionar el tiempo.',
     href: 'https://www.google.com/search?tbm=bks&q=Como+gestionar+tu+tiempo+Harvard+Business+Review',
-    coverUrl: 'https://http2.mlstatic.com/D_NQ_NP_999794-CBT75842713440_042024-O.webp',
+    coverUrl: '/covers/como-gestionar-tu-tiempo.webp',
     topics: ['Gestión del tiempo'],
   },
   {
@@ -349,7 +361,7 @@ export const BOOKS: Book[] = [
     author: 'Héctor Leonardo Mora',
     blurb: 'Sobre la disciplina como el verdadero factor detrás de los resultados sostenidos.',
     href: 'https://www.google.com/search?tbm=bks&q=Sin+disciplina+el+talento+importa+poco+Hector+Leonardo+Mora',
-    coverUrl: 'https://website-assets.studocu.com/img/document_thumbnails/daee232a997ed1347389005017a34479/thumb_1200_1679.png',
+    coverUrl: '/covers/sin-disciplina-el-talento-importa-poco.webp',
     topics: ['Desarrollo profesional'],
   },
   {
@@ -358,7 +370,7 @@ export const BOOKS: Book[] = [
     author: 'INFOTEP (Capacitar es progresar)',
     blurb: 'Guía práctica de INFOTEP (República Dominicana) para implementar las 5S en organizaciones.',
     href: 'https://www.google.com/search?tbm=bks&q=Manual+para+la+implementaci%C3%B3n+sostenible+de+las+5S+INFOTEP',
-    coverUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQihZCxX0Hr7S8M3usvq-JKjBNYQ-DtdcF-hSqJvVoD9Q&s',
+    coverUrl: '/covers/manual-para-la-implementacion-sostenible-de-las-5s.webp',
     topics: ['Mejora continua'],
   },
   {
@@ -367,7 +379,7 @@ export const BOOKS: Book[] = [
     author: 'Fernando Botella',
     blurb: 'Sobre los cambios que trae la cuarta revolución industrial al trabajo y las organizaciones.',
     href: 'https://www.google.com/search?tbm=bks&q=Bienvenido+a+la+revoluci%C3%B3n+4.0+Fernando+Botella',
-    coverUrl: 'https://images.cdn1.buscalibre.com/fit-in/360x360/97/27/972757c7852dc3de51718876ece56377.jpg',
+    coverUrl: '/covers/bienvenido-a-la-revolucion-4-0.webp',
     topics: ['Transformación digital'],
   },
   {
@@ -376,7 +388,7 @@ export const BOOKS: Book[] = [
     author: 'Fernando Braga, Carlos Giardo y Claudio Minzer',
     blurb: 'Una biografía sobre la vida y las partidas del histórico campeón de ajedrez.',
     href: 'https://www.google.com/search?tbm=bks&q=Bobby+Fischer+la+leyenda+vida+y+partidas',
-    coverUrl: 'https://http2.mlstatic.com/D_NQ_NP_972456-MLA49382008093_032022-O.webp',
+    coverUrl: '/covers/bobby-fischer-la-leyenda-vida-y-partidas-del-mayor-genio-del-ajedrez.webp',
     topics: ['Historia'],
   },
   {
@@ -385,7 +397,7 @@ export const BOOKS: Book[] = [
     author: 'Harvard Business Review Press',
     blurb: 'De la serie de Inteligencia Emocional de HBR, sobre cómo manejar relaciones e interacciones difíciles.',
     href: 'https://www.google.com/search?tbm=bks&q=Inteligencia+emocional+como+tratar+con+gente+dificil+HBR',
-    coverUrl:'https://http2.mlstatic.com/D_NQ_NP_892270-CBT92318019354_092025-O.webp',
+    coverUrl: '/covers/inteligencia-emocional-como-tratar-con-gente-dificil.webp',
     topics: ['Comunicación'],
   },
   {
@@ -394,7 +406,7 @@ export const BOOKS: Book[] = [
     author: 'Jorge Muniain',
     blurb: 'Técnicas prácticas para encontrar empleo y venderte mejor en una búsqueda laboral.',
     href: 'https://www.google.com/search?tbm=bks&q=Como+te+venden+te+contratan+Jorge+Muniain',
-    coverUrl: 'https://images.cdn1.buscalibre.com/fit-in/360x360/83/2f/832fcb57624ebfd43566eaa4bb16017d.jpg',
+    coverUrl: '/covers/como-te-venden-te-contratan.webp',
     topics: ['Desarrollo profesional'],
   },
   {
@@ -403,7 +415,7 @@ export const BOOKS: Book[] = [
     author: 'Jorge Daniel Moreno',
     blurb: 'Sobre qué hacer cuando un problema se vuelve crónico y no encuentra solución.',
     href: 'https://www.google.com/search?tbm=bks&q=CronicaMente+Jorge+Daniel+Moreno',
-    coverUrl: 'https://images.cdn1.buscalibre.com/fit-in/360x360/4a/40/4a4017792619ed604325fe6fd6564248.jpg',
+    coverUrl: '/covers/cronicamente-que-hacer-cuando-un-problema-no-se-resuelve.webp',
     topics: ['Desarrollo personal'],
   },
 
@@ -413,7 +425,7 @@ export const BOOKS: Book[] = [
     author: 'Daniel López Rosetti',
     blurb: 'Sobre el estrés, la salud emocional y cómo encontrar equilibrio en la vida cotidiana.',
     href: 'https://www.google.com/search?tbm=bks&q=Equilibrio+Daniel+Lopez+Rosetti',
-    coverUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuP1p64SXuozlU9grFVzJp8mQFq6fi3ZEpIMFHGpKVuAxyIjvHnPoqgc4&s=10',
+    coverUrl: '/covers/equilibrio.webp',
     topics: ['Bienestar'],
   },
   {
@@ -422,7 +434,7 @@ export const BOOKS: Book[] = [
     author: 'Martin Alaimo',
     blurb: 'Personas e interacciones por sobre procesos y herramientas, para equipos ágiles más efectivos.',
     href: 'https://www.google.com/search?tbm=bks&q=Equipos+m%C3%A1s+productivos+Martin+Alaimo',
-    coverUrl: 'https://m.media-amazon.com/images/I/41v1jACKWzL._AC_UF1000,1000_QL80_.jpg',
+    coverUrl: '/covers/equipos-mas-productivos.webp',
     topics: ['Equipos'],
   },
   {
@@ -431,7 +443,7 @@ export const BOOKS: Book[] = [
     author: 'Martin Alaimo',
     blurb: 'El camino de un coach hacia la agilidad empresarial y la facilitación de equipos ágiles.',
     href: 'https://www.google.com/search?tbm=bks&q=Chief+Agility+Officer+Martin+Alaimo',
-    coverUrl:'https://blog.nicopaez.com/wp-content/uploads/2018/10/agilityofficer.jpg',
+    coverUrl: '/covers/chief-agility-officer.webp',
     topics: ['Agilidad'],
   },
   {
@@ -440,7 +452,7 @@ export const BOOKS: Book[] = [
     author: 'Ángel Fernando Castro Santiago, Rubén Lado Cestal y Fernando de Llano Paz',
     blurb: 'Una introducción práctica a la gestión de riesgo empresarial, paso a paso.',
     href: 'https://www.google.com/search?tbm=bks&q=Gu%C3%ADa+para+implementar+la+gesti%C3%B3n+de+riesgo+en+la+empresa',
-    coverUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKCrqtlIzkMvhTnKJVY84E7iSAoTuNURX7CcxM2vJpDN3OBSd1xg8bKkg&s=10',
+    coverUrl: '/covers/guia-para-implementar-la-gestion-de-riesgo-en-la-empresa-paso-a-paso.webp',
     topics: ['Riesgo'],
   },
   {
@@ -449,7 +461,7 @@ export const BOOKS: Book[] = [
     author: 'Julián Reyes',
     blurb: 'No te preguntes si comunicar bien es difícil, pregúntate si podés hacerlo fácil.',
     href: 'https://www.google.com/search?tbm=bks&q=Habla+como+un+l%C3%ADder+Juli%C3%A1n+Reyes',
-    coverUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXa-FPHhD19BLgXQhY7puC6XsZz8IyjBFL3VqzxSnq4VTCnUQQ3RH7BNA&s=10',
+    coverUrl: '/covers/habla-como-un-lider.webp',
     topics: ['Comunicación', 'Liderazgo'],
   },
   {
@@ -458,7 +470,7 @@ export const BOOKS: Book[] = [
     author: 'Brian Tracy',
     blurb: 'Siete pasos prácticos para pasar de las palabras a los resultados.',
     href: 'https://www.google.com/search?tbm=bks&q=Habla+menos+actua+mas+Brian+Tracy',
-    coverUrl: 'https://www.penguinlibros.com/ar/1642381/habla-menos-actua-mas.jpg',
+    coverUrl: '/covers/habla-menos-actua-mas.webp',
     topics: ['Productividad'],
   },
   {
@@ -467,7 +479,7 @@ export const BOOKS: Book[] = [
     author: 'David Gómez (Detalles que Enamoran / BienPensado)',
     blurb: 'Ideas prácticas para mejorar la experiencia y el compromiso de los empleados.',
     href: 'https://www.google.com/search?tbm=bks&q=50+formas+de+enamorar+a+los+empleados+David+Gomez',
-    coverUrl: 'https://imgv2-2-f.scribdassets.com/img/document/373482935/original/c6b152b3d6/1?v=1',
+    coverUrl: '/covers/50-formas-de-enamorar-a-los-empleados.webp',
     topics: ['Cultura'],
   },
   {
@@ -476,7 +488,7 @@ export const BOOKS: Book[] = [
     author: 'Raimon Samsó',
     blurb: 'Conquista tu libertad financiera, un recorrido por la mentalidad y hábitos frente al dinero.',
     href: 'https://www.google.com/search?tbm=bks&q=El+c%C3%B3digo+del+dinero+Raimon+Sams%C3%B3',
-    coverUrl: 'https://contentv2.tap-commerce.com/cover/large/9788497775762_1.jpg?id_com=1156',
+    coverUrl: '/covers/el-codigo-del-dinero.webp',
     topics: ['Desarrollo personal'],
   },
   {
@@ -484,8 +496,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Mark Richards y Neal Ford',
     blurb: 'Un enfoque integral y basado en la ingeniería para la arquitectura de software.',
+    longDescription:
+      'Richards y Ford tratan la arquitectura como disciplina de ingeniería: characteristics (los "-ilities"), componentes y acoplamiento, y un catálogo de estilos (capas, microservicios, event-driven, space-based, etc.) con sus trade-offs. La segunda mitad cubre las habilidades blandas: diagramar, negociar, liderar equipos y desarrollar una carrera de arquitecto. Su mantra: "todo en arquitectura es un trade-off".',
     href: 'https://www.google.com/search?tbm=bks&q=Fundamentals+of+Software+Architecture+Mark+Richards+Neal+Ford',
-    coverUrl: 'https://covers.openlibrary.org/b/id/10193363-L.jpg',
+    coverUrl: '/covers/fundamentals-of-software-architecture.webp',
     topics: ['Diseño y arquitectura'],
   },
   {
@@ -494,7 +508,7 @@ export const BOOKS: Book[] = [
     author: 'Martin Fowler',
     blurb: 'El catálogo clásico de patrones para diseñar aplicaciones empresariales.',
     href: 'https://www.google.com/search?tbm=bks&q=Patterns+of+Enterprise+Application+Architecture+Martin+Fowler',
-    coverUrl: 'https://covers.openlibrary.org/b/id/192501-L.jpg',
+    coverUrl: '/covers/patterns-of-enterprise-application-architecture.webp',
     topics: ['Diseño y arquitectura'],
   },
   {
@@ -503,7 +517,7 @@ export const BOOKS: Book[] = [
     author: 'Neal Ford, Rebecca Parsons, Patrick Kua y Pramod Sadalage',
     blurb: 'Cómo diseñar arquitecturas de software que soporten el cambio constante.',
     href: 'https://www.google.com/search?tbm=bks&q=Building+Evolutionary+Architectures+Neal+Ford',
-    coverUrl: 'https://covers.openlibrary.org/b/id/14765947-L.jpg',
+    coverUrl: '/covers/building-evolutionary-architectures.webp',
     topics: ['Diseño y arquitectura'],
   },
   {
@@ -511,8 +525,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Martin Fowler',
     blurb: 'La referencia clásica sobre cómo mejorar el diseño del código existente.',
+    longDescription:
+      'Martin Fowler define refactorizar como cambiar la estructura interna del código sin cambiar su comportamiento observable, siempre respaldado por tests. El libro combina el "por qué" (deuda de diseño, code smells) con un catálogo de refactors nombrados y mecánicos, paso a paso. La segunda edición usa JavaScript y refuerza la idea de avanzar en pasos chiquitos y seguros.',
     href: 'https://www.google.com/search?tbm=bks&q=Refactoring+Martin+Fowler',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8507565-L.jpg',
+    coverUrl: '/covers/refactoring.webp',
     topics: ['Calidad de software'],
   },
   {
@@ -520,8 +536,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'John K. Ousterhout',
     blurb: 'Sobre la gestión de la complejidad como problema central del diseño de software.',
+    longDescription:
+      'Ousterhout sostiene que el enemigo del diseño es la complejidad, que se acumula de a poco (dependencias y "oscuridad"). Propone módulos profundos (interfaz simple, implementación potente), separar lo general de lo específico, diseñar dos veces y tratar los comentarios como parte del diseño. Un libro corto y polémico: discute abiertamente con algunas ideas de Clean Code.',
     href: 'https://www.google.com/search?tbm=bks&q=A+Philosophy+of+Software+Design+John+Ousterhout',
-    coverUrl: 'https://covers.openlibrary.org/b/id/10352230-L.jpg',
+    coverUrl: '/covers/a-philosophy-of-software-design.webp',
     topics: ['Diseño y arquitectura'],
   },
   {
@@ -529,8 +547,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Michael C. Feathers',
     blurb: 'Técnicas para entender, testear y modificar código heredado con seguridad.',
+    longDescription:
+      'Feathers define "legacy code" como código sin tests. El problema: para agregar tests hay que romper dependencias, pero para romperlas con seguridad conviene tener tests. El libro resuelve ese círculo con "seams" (puntos donde cambiar comportamiento sin editar), técnicas para llevar el código a un banco de pruebas y un catálogo de recetas para las situaciones más incómodas del mundo real.',
     href: 'https://www.google.com/search?tbm=bks&q=Working+Effectively+with+Legacy+Code+Michael+Feathers',
-    coverUrl: 'https://covers.openlibrary.org/b/id/86561-L.jpg',
+    coverUrl: '/covers/working-effectively-with-legacy-code.webp',
     topics: ['Deuda técnica'],
   },
   {
@@ -539,7 +559,7 @@ export const BOOKS: Book[] = [
     author: 'Vaughn Vernon',
     blurb: 'Una introducción concisa a los conceptos esenciales de Domain-Driven Design.',
     href: 'https://www.google.com/search?tbm=bks&q=Domain-Driven+Design+Distilled+Vaughn+Vernon',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8512313-L.jpg',
+    coverUrl: '/covers/domain-driven-design-distilled.webp',
     topics: ['Diseño y arquitectura'],
   },
   {
@@ -547,8 +567,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Matthew Skelton y Manuel Pais',
     blurb: 'Cómo organizar equipos de tecnología para lograr un flujo rápido de valor.',
+    longDescription:
+      'Skelton y Pais parten de la ley de Conway: la arquitectura del sistema termina reflejando la estructura de los equipos. Proponen cuatro tipos de equipo (stream-aligned, enabling, complicated-subsystem y platform) y tres modos de interacción (colaboración, X-as-a-Service, facilitación), más el concepto de carga cognitiva del equipo como límite real para decidir qué software puede sostener.',
     href: 'https://www.google.com/search?tbm=bks&q=Team+Topologies+Matthew+Skelton+Manuel+Pais',
-    coverUrl: 'https://covers.openlibrary.org/b/id/15096046-L.jpg',
+    coverUrl: '/covers/team-topologies.webp',
     topics: ['Equipos'],
   },
   {
@@ -556,8 +578,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Nicole Forsgren, Jez Humble y Gene Kim',
     blurb: 'La investigación detrás de qué hace a los equipos de tecnología de alto desempeño.',
+    longDescription:
+      'Basado en años del estado del DevOps, Accelerate muestra con datos que entregar rápido y entregar con calidad no se contraponen. Define cuatro métricas clave (frecuencia de despliegue, lead time, tasa de fallas en cambios y tiempo de restauración) y las capacidades técnicas, de proceso y culturales que las mejoran. Incluye el método de investigación para que se pueda replicar.',
     href: 'https://www.google.com/search?tbm=bks&q=Accelerate+Nicole+Forsgren+Jez+Humble+Gene+Kim',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8509069-L.jpg',
+    coverUrl: '/covers/accelerate.webp',
     topics: ['Mejora continua'],
   },
   {
@@ -565,8 +589,10 @@ export const BOOKS: Book[] = [
     category: AGI,
     author: 'Gene Kim, Kevin Behr y George Spafford',
     blurb: 'Una novela sobre DevOps y cómo transformar la forma de trabajar de TI.',
+    longDescription:
+      'Bill hereda un proyecto crítico ("Phoenix") al borde del colapso y, guiado por un mentor tipo Yoda, descubre las "tres vías" de DevOps: flujo de trabajo de izquierda a derecha, feedback rápido de derecha a izquierda, y una cultura de experimentación y aprendizaje continuo. Reescritura moderna de La meta para el mundo de TI y operaciones.',
     href: 'https://www.google.com/search?tbm=bks&q=The+Phoenix+Project+Gene+Kim',
-    coverUrl: 'https://covers.openlibrary.org/b/id/9151976-L.jpg',
+    coverUrl: '/covers/the-phoenix-project.webp',
     topics: ['Mejora continua'],
   },
   {
@@ -575,7 +601,7 @@ export const BOOKS: Book[] = [
     author: 'Mik Kersten',
     blurb: 'Cómo evolucionar de la gestión de proyectos a la gestión de producto con el Flow Framework.',
     href: 'https://www.google.com/search?tbm=bks&q=Project+to+Product+Mik+Kersten',
-    coverUrl: 'https://covers.openlibrary.org/b/id/10539130-L.jpg',
+    coverUrl: '/covers/project-to-product.webp',
     topics: ['Producto digital'],
   },
   {
@@ -583,8 +609,10 @@ export const BOOKS: Book[] = [
     category: PRO,
     author: 'Marty Cagan',
     blurb: 'Cómo crear productos que a los clientes les encanten.',
+    longDescription:
+      'Marty Cagan describe cómo trabajan los equipos de producto de las mejores empresas tecnológicas: product managers que descubren en paralelo a la entrega, equipos empoderados que resuelven problemas en vez de ejecutar features, y técnicas de discovery para reducir el riesgo de valor, usabilidad, factibilidad y viabilidad antes de construir.',
     href: 'https://www.google.com/search?tbm=bks&q=Inspired+Marty+Cagan',
-    coverUrl: 'https://covers.openlibrary.org/b/id/9700654-L.jpg',
+    coverUrl: '/covers/inspired.webp',
     topics: ['Producto digital'],
   },
   {
@@ -592,8 +620,10 @@ export const BOOKS: Book[] = [
     category: PRO,
     author: 'Teresa Torres',
     blurb: 'Cómo los equipos de producto pueden generar valor de forma continua para el cliente y el negocio.',
+    longDescription:
+      'Teresa Torres propone convertir el discovery en un hábito semanal: entrevistas continuas con clientes, un "opportunity solution tree" para conectar el resultado deseado con oportunidades y soluciones, y experimentos chicos para validar suposiciones. Muy práctico y accionable para equipos que quieren dejar de "entregar features" y empezar a mover métricas.',
     href: 'https://www.google.com/search?tbm=bks&q=Continuous+Discovery+Habits+Teresa+Torres',
-    coverUrl: 'https://covers.openlibrary.org/b/id/11136152-L.jpg',
+    coverUrl: '/covers/continuous-discovery-habits.webp',
     topics: ['Producto digital'],
   },
   {
@@ -601,8 +631,10 @@ export const BOOKS: Book[] = [
     category: PRO,
     author: 'Melissa Perri',
     blurb: 'Cómo la gestión de producto efectiva genera valor real, en vez de solo entregar funcionalidades.',
+    longDescription:
+      'Melissa Perri llama "build trap" a medir el éxito por cantidad de features en vez de por valor entregado. El libro cubre el rol real del product manager, cómo estructurar la organización, la estrategia de producto como conjunto de decisiones, y el ciclo de experimentación que evita construir cosas que nadie necesita.',
     href: 'https://www.google.com/search?tbm=bks&q=Escaping+the+Build+Trap+Melissa+Perri',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13124020-L.jpg',
+    coverUrl: '/covers/escaping-the-build-trap.webp',
     topics: ['Producto digital'],
   },
   {
@@ -610,8 +642,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Jeff Patton',
     blurb: 'Cómo organizar historias de usuario para tener mejores conversaciones y construir el producto correcto.',
+    longDescription:
+      'Jeff Patton recuerda que el objetivo de las historias es la conversación, no el documento. El story mapping ordena las historias en dos dimensiones —el flujo de la actividad del usuario y la prioridad— para ver el todo, contar la historia del producto y cortar releases delgadas que igual entreguen valor. Incluye mucho sobre outcomes vs. outputs.',
     href: 'https://www.google.com/search?tbm=bks&q=User+Story+Mapping+Jeff+Patton',
-    coverUrl: 'https://covers.openlibrary.org/b/id/8206841-L.jpg',
+    coverUrl: '/covers/user-story-mapping.webp',
     topics: ['Requisitos'],
   },
   {
@@ -619,8 +653,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Chip Huyen',
     blurb: 'Un enfoque integral para diseñar sistemas de machine learning listos para producción.',
+    longDescription:
+      'Chip Huyen mira el ML como sistema de software: definir el problema y las métricas de negocio, ingeniería de datos y features, entrenamiento y evaluación offline vs. online, despliegue, monitoreo de data distribution shift y la infraestructura y organización que lo sostienen. Poco código, mucho criterio de diseño.',
     href: 'https://www.google.com/search?tbm=bks&q=Designing+Machine+Learning+Systems+Chip+Huyen',
-    coverUrl: 'https://covers.openlibrary.org/b/id/13314480-L.jpg',
+    coverUrl: '/covers/designing-machine-learning-systems.webp',
     topics: ['Inteligencia artificial aplicada'],
   },
   {
@@ -628,8 +664,10 @@ export const BOOKS: Book[] = [
     category: ING,
     author: 'Chip Huyen',
     blurb: 'Cómo construir aplicaciones reales sobre modelos de fundación e IA generativa.',
+    longDescription:
+      'La continuación de "Designing ML Systems" enfocada en foundation models: evaluación de sistemas con salidas abiertas, prompt engineering, RAG y agentes, fine-tuning, optimización de costo y latencia, y arquitectura de producto de IA. Pensado para quien construye sobre APIs de modelos en vez de entrenarlos desde cero.',
     href: 'https://www.google.com/search?tbm=bks&q=AI+Engineering+Chip+Huyen',
-    coverUrl: 'https://covers.openlibrary.org/b/id/15091156-L.jpg',
+    coverUrl: '/covers/ai-engineering.webp',
     topics: ['Inteligencia artificial aplicada'],
   },
   {
@@ -638,7 +676,7 @@ export const BOOKS: Book[] = [
     author: 'Jay Alammar y Maarten Grootendorst',
     blurb: 'Una guía práctica e ilustrada para entender y aplicar modelos de lenguaje.',
     href: 'https://www.google.com/search?tbm=bks&q=Hands-On+Large+Language+Models+Jay+Alammar',
-    coverUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_745221-MLA112317815117_052026-F.webp',
+    coverUrl: '/covers/hands-on-large-language-models.webp',
     topics: ['Inteligencia artificial aplicada'],
   },
   {
@@ -647,7 +685,7 @@ export const BOOKS: Book[] = [
     author: 'Cathy Chen, Niall Richard Murphy, Kranti Parisa, D. Sculley y Todd Underwood',
     blurb: 'Prácticas de confiabilidad e ingeniería aplicadas a sistemas de machine learning en producción.',
     href: 'https://www.google.com/search?tbm=bks&q=Reliable+Machine+Learning+Cathy+Chen',
-    coverUrl: 'https://covers.openlibrary.org/b/id/14021348-L.jpg',
+    coverUrl: '/covers/reliable-machine-learning.webp',
     topics: ['Inteligencia artificial aplicada'],
   },
 ];

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { PlayCircle } from 'lucide-react';
 import { siYoutube } from 'simple-icons';
-import type { YoutubeVideo } from '@/lib/resources';
+import type { YoutubeVideo } from '@/data/youtube';
 
 const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@argislab';
 

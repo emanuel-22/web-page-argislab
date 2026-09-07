@@ -1,6 +1,6 @@
 import { BadgeCheck } from 'lucide-react';
 import { siInstagram } from 'simple-icons';
-import type { InstagramPost, InstagramProfile } from '@/lib/resources';
+import type { InstagramPost, InstagramProfile } from '@/data/instagram';
 
 const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/argis_lab/';
 

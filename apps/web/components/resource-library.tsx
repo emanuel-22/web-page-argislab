@@ -1,53 +1,52 @@
 import Link from 'next/link';
 import { BookMarked, BookOpen, FileText, Globe, ListChecks, MessageSquare, Presentation, Wrench } from 'lucide-react';
 
-import { BookCard } from '@/components/reading-list';
-import { TalkList } from '@/components/talk-list';
+import { BookShowcase } from '@/components/book-showcase';
+import { PreziCarousel } from '@/components/prezi-carousel';
 import { WebsiteList } from '@/components/website-list';
 import type { Book } from '@/data/books';
-import type { Talk } from '@/data/talks';
 import type { Website } from '@/data/websites';
 
-const PREVIEW_SIZE = 6;
+const PREVIEW_COUNT = 3;
 
 const TYPES = [
+  'Libros recomendados',
+  'Materiales de charlas',
+  'Páginas web recomendadas',
   'Plantillas',
   'Prompts',
   'Checklists',
   'Guías',
   'Herramientas',
-  'Materiales de charlas',
-  'Lecturas recomendadas',
-  'Páginas web recomendadas',
 ] as const;
 
 const TYPE_SLUGS: Record<(typeof TYPES)[number], string> = {
+  'Libros recomendados': 'libros-recomendados',
+  'Materiales de charlas': 'materiales-de-charlas',
+  'Páginas web recomendadas': 'paginas-web-recomendadas',
   Plantillas: 'plantillas',
   Prompts: 'prompts',
   Checklists: 'checklists',
   Guías: 'guias',
   Herramientas: 'herramientas',
-  'Materiales de charlas': 'materiales-de-charlas',
-  'Lecturas recomendadas': 'lecturas-recomendadas',
-  'Páginas web recomendadas': 'paginas-web-recomendadas',
 };
 
 const TYPE_ICONS: Record<(typeof TYPES)[number], typeof FileText> = {
+  'Libros recomendados': BookMarked,
+  'Materiales de charlas': Presentation,
+  'Páginas web recomendadas': Globe,
   Plantillas: FileText,
   Prompts: MessageSquare,
   Checklists: ListChecks,
   Guías: BookOpen,
   Herramientas: Wrench,
-  'Materiales de charlas': Presentation,
-  'Lecturas recomendadas': BookMarked,
-  'Páginas web recomendadas': Globe,
 };
 
 type Resource = {
   title: string;
   type: Exclude<
     (typeof TYPES)[number],
-    'Lecturas recomendadas' | 'Materiales de charlas' | 'Páginas web recomendadas'
+    'Libros recomendados' | 'Materiales de charlas' | 'Páginas web recomendadas'
   >;
   area: string;
 };
@@ -81,7 +80,7 @@ function ResourceCard({ title, type, area }: Resource) {
   );
 }
 
-export function ResourceLibrary({ books, talks, websites }: { books: Book[]; talks: Talk[]; websites: Website[] }) {
+export function ResourceLibrary({ books, websites }: { books: Book[]; websites: Website[] }) {
   return (
     <div className="flex flex-col gap-20">
       <nav className="flex flex-wrap justify-center gap-2">
@@ -101,60 +100,59 @@ export function ResourceLibrary({ books, talks, websites }: { books: Book[]; tal
       </nav>
 
       {TYPES.map((type) => {
-        if (type === 'Lecturas recomendadas') {
+        if (type === 'Libros recomendados') {
           const Icon = TYPE_ICONS[type];
           const preview = [...books]
             .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
-            .slice(0, PREVIEW_SIZE);
+            .slice(0, PREVIEW_COUNT);
           return (
             <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
               <div className="flex items-center gap-3 border-b pb-4">
                 <Icon className="h-5 w-5 text-primary" />
                 <h2 className="text-xl font-black tracking-tight">{type}</h2>
+                <span className="text-sm text-muted-foreground">({books.length})</span>
               </div>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {preview.map((book) => (
-                  <BookCard key={book.title} {...book} />
-                ))}
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Una selección de la biblioteca. Tocá un libro para verlo en grande con una descripción más
+                detallada, o entrá a la biblioteca completa para recorrerla por categoría.
+              </p>
+              <div className="mt-4">
+                <BookShowcase books={preview} />
               </div>
-              {books.length > PREVIEW_SIZE ? (
-                <div className="mt-6 flex justify-center">
-                  <Link
-                    href="/recursos/lecturas-recomendadas"
-                    className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
-                  >
-                    Ver todas las lecturas recomendadas ({books.length}) →
-                  </Link>
-                </div>
-              ) : null}
+              <div className="mt-4 flex justify-center">
+                <Link
+                  href="/contenidos/libros-recomendados"
+                  className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                >
+                  Ver la biblioteca por categoría →
+                </Link>
+              </div>
             </section>
           );
         }
 
         if (type === 'Materiales de charlas') {
           const Icon = TYPE_ICONS[type];
-          const preview = [...talks]
-            .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
-            .slice(0, PREVIEW_SIZE);
           return (
             <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
               <div className="flex items-center gap-3 border-b pb-4">
                 <Icon className="h-5 w-5 text-primary" />
                 <h2 className="text-xl font-black tracking-tight">{type}</h2>
               </div>
-              <div className="mt-6">
-                <TalkList talks={preview} />
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Una muestra de las últimas presentaciones. Tocá play para verlas acá mismo o abrilas en Prezi.
+              </p>
+              <div className="mt-4">
+                <PreziCarousel limit={PREVIEW_COUNT} />
               </div>
-              {talks.length > PREVIEW_SIZE ? (
-                <div className="mt-6 flex justify-center">
-                  <Link
-                    href="/recursos/materiales-de-charlas"
-                    className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
-                  >
-                    Ver todos los materiales de charlas ({talks.length}) →
-                  </Link>
-                </div>
-              ) : null}
+              <div className="mt-4 flex justify-center">
+                <Link
+                  href="/recursos/materiales-de-charlas"
+                  className="rounded-full border bg-card px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent"
+                >
+                  Ver todas las presentaciones →
+                </Link>
+              </div>
             </section>
           );
         }
@@ -163,7 +161,7 @@ export function ResourceLibrary({ books, talks, websites }: { books: Book[]; tal
           const Icon = TYPE_ICONS[type];
           const preview = [...websites]
             .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
-            .slice(0, PREVIEW_SIZE);
+            .slice(0, PREVIEW_COUNT);
           return (
             <section key={type} id={TYPE_SLUGS[type]} className="scroll-mt-24">
               <div className="flex items-center gap-3 border-b pb-4">
@@ -173,7 +171,7 @@ export function ResourceLibrary({ books, talks, websites }: { books: Book[]; tal
               <div className="mt-6">
                 <WebsiteList websites={preview} />
               </div>
-              {websites.length > PREVIEW_SIZE ? (
+              {websites.length > PREVIEW_COUNT ? (
                 <div className="mt-6 flex justify-center">
                   <Link
                     href="/recursos/paginas-web-recomendadas"

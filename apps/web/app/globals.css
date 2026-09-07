@@ -7,3 +7,40 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+.animate-hero-float {
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+.animate-hero-glow {
+  animation: hero-glow 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float,
+  .animate-hero-glow {
+    animation: none;
+  }
+}

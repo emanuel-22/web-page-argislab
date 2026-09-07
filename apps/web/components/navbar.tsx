@@ -16,11 +16,10 @@ import { ModeToggle } from './mode-toggle';
 
 const NAV_ITEMS = [
   { label: 'Inicio', href: '/' },
-  { label: 'Contenido', href: '/contenidos' },
-  { label: 'Recursos', href: '/recursos' },
-  { label: 'Comunidad', href: '/comunidad' },
+  { label: 'Explorar', href: '/contenidos' },
   { label: 'Actividades', href: '/actividades' },
-  { label: 'Sobre Argis Lab', href: '/sobre' },
+  { label: 'Comunidad', href: '/comunidad' },
+  { label: 'Argis Lab', href: '/sobre' },
 ];
 
 export function Navbar() {
@@ -28,13 +27,13 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-8">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 sm:px-8">
         <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight">
           <Image src="/logo.png" alt="Argis Lab" width={70} height={70} className="rounded-md" priority />
-          Emanuel Barboza   |   Argis Lab 
+          Argis Lab
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {NAV_ITEMS.map((item) => {
             const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
             return (
@@ -42,11 +41,14 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`text-sm transition-colors hover:text-foreground ${
+                className={`relative rounded-md px-3 py-2 text-sm transition-colors hover:text-foreground ${
                   isActive ? 'font-medium text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
+                {isActive && (
+                  <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-primary" aria-hidden="true" />
+                )}
               </Link>
             );
           })}
@@ -63,11 +65,21 @@ export function Navbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {NAV_ITEMS.map((item) => (
-                <DropdownMenuItem key={item.href} asChild>
-                  <Link href={item.href}>{item.label}</Link>
-                </DropdownMenuItem>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+                return (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={isActive ? 'font-medium text-foreground' : undefined}
+                    >
+                      {isActive && <span className="mr-2 h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />}
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
