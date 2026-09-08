@@ -19,4 +19,4 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - '8000:3000'
+      -  "127.0.0.1:8000:3000"
