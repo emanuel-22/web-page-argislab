@@ -18,5 +18,16 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: production
+
+    # Solo loopback: la única puerta pública es el Nginx del host.
     ports:
       -  "127.0.0.1:8000:3000"
+
+    # Endurecimiento: sin capabilities extra, sin escalar privilegios, /tmp
+    # efímero. Corre como usuario no-root (uid 1001, ver Dockerfile).
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp
